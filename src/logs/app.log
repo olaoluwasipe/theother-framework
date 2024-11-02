@@ -1,0 +1,187 @@
+[2024-10-25 00:15:33] [ERROR] Call to a member function prepare() on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Models\User.php on line 15
+[2024-10-25 00:19:09] [ERROR] Call to undefined method App\Models\User::id() in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\support\Traits\ForwardsCalls.php on line 71
+[2024-10-25 00:20:06] [ERROR] Call to undefined method App\Models\User::id() in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\support\Traits\ForwardsCalls.php on line 71
+[2024-10-25 00:21:37] [ERROR] Too few arguments to function App\Models\User::id(), 0 passed in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 248 and exactly 1 expected in C:\Users\Olaoluwa\Downloads\theother-framework\app\Models\User.php on line 23
+[2024-10-25 00:23:18] [ERROR] Call to undefined method App\Models\User::user() in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\support\Traits\ForwardsCalls.php on line 71
+[2024-10-25 16:12:16] [ERROR] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campaign_chaser.transactions_tb' doesn't exist (SQL: select sum(`amount`) as aggregate from `transactions_tb` where `amount` > 1) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-25 16:22:32] [ERROR] Database connection [default] not configured. in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\DatabaseManager.php on line 161
+[2024-10-25 16:26:47] [ERROR] Database connection [default] not configured. in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\DatabaseManager.php on line 161
+[2024-10-25 16:27:34] [ERROR] Database connection [default] not configured. in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\DatabaseManager.php on line 161
+[2024-10-25 16:27:40] [ERROR] Database connection [default] not configured. in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\DatabaseManager.php on line 161
+[2024-10-25 16:31:42] [ERROR] Database connection [default] not configured. in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\DatabaseManager.php on line 161
+[2024-10-25 16:33:33] [ERROR] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campaign_chaser.transactions_tb' doesn't exist (SQL: select sum(`amount`) as aggregate from `transactions_tb` where `amount` > 1) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-25 16:49:13] [ERROR] A facade root has not been set. in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\support\Facades\Facade.php on line 258
+[2024-10-25 16:50:06] [ERROR] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campaign_chaser.transaction_tb' doesn't exist (SQL: select sum(`amount`) as aggregate from `transaction_tb`) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-25 16:50:38] [ERROR] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'vas_core.transaction_tb' doesn't exist (SQL: select sum(`amount`) as aggregate from `transaction_tb`) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-25 16:50:52] [ERROR] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'where clause' (SQL: select sum(`amount`) as aggregate from `transactions_tb` where `created_at` <= DATE_SUB(NOW(), INTERVAL 1 day)) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-26 01:05:29] [ERROR] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'charge_status' in 'where clause' (SQL: select count(*) as aggregate from `transactions_tb` where `charge_status` > Success and `bearer_id` = SecureD) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-26 01:28:20] [ERROR] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campaign_chaser.transactions_db' doesn't exist (SQL: select count(*) as aggregate from `transactions_db` where `t_date` <= DATE_SUB(NOW(), INTERVAL 6 day) and `t_date` > DATE_SUB(NOW(), INTERVAL 7 day)) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-26 01:30:14] [ERROR] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'vas_core.transactions_db' doesn't exist (SQL: select count(*) as aggregate from `transactions_db` where `t_date` <= DATE_SUB(NOW(), INTERVAL 6 day) and `t_date` > DATE_SUB(NOW(), INTERVAL 7 day)) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-26 01:38:56] [ERROR] Call to undefined function now() in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 416
+[2024-10-26 01:40:52] [ERROR] Class "CustomDateTime" not found in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 391
+[2024-10-26 01:56:52] [ERROR] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campaign_chaser.game_sub' doesn't exist (SQL: select * from `game_sub`) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-26 01:57:00] [ERROR] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'campaign_chaser.game_sub' doesn't exist (SQL: select * from `game_sub`) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-26 15:10:58] [ERROR] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'amount' in 'field list' (SQL: select count(`amount`) as aggregate from `sub_details` where `amount` > 1 and `sub_status` is null) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-26 15:13:22] [ERROR] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'amount' in 'field list' (SQL: select count(`amount`) as aggregate from `sub_details` where `sub_status` = 0) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-26 15:30:32] [ERROR] [2] Undefined variable $unSubs in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 498
+[2024-10-26 15:30:32] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 498
+[2024-10-26 15:31:21] [ERROR] [2] Undefined variable $unSubs in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 498
+[2024-10-26 15:31:21] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 498
+[2024-10-26 15:38:48] [ERROR] [2] Undefined variable $unSubs in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 498
+[2024-10-26 15:38:48] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 498
+[2024-10-26 15:43:41] [ERROR] [2] Undefined variable $unSubs in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 498
+[2024-10-26 15:43:41] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 498
+[2024-10-26 15:48:55] [ERROR] [2] Undefined variable $unSubs in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 498
+[2024-10-26 15:48:55] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 498
+[2024-10-26 15:51:10] [ERROR] [2] Undefined variable $unSubs in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 498
+[2024-10-26 15:51:10] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 498
+[2024-10-26 16:04:11] [ERROR] [2] Undefined variable $subRev in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 512
+[2024-10-26 16:04:11] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 512
+[2024-10-26 20:11:36] [ERROR] SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it (SQL: select sum(`amount`) as aggregate from `transactions_tb` where `amount` > 1) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-26 23:08:25] [ERROR] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'vas_core.transactions_db' doesn't exist (SQL: select count(*) as aggregate from `transactions_db` where `charges_status` = You deactivate the service successfully.) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-26 23:22:42] [ERROR] 0 in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 360
+[2024-10-26 23:26:26] [ERROR] Division by zero in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 365
+[2024-10-27 12:58:31] [ERROR] SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it (SQL: select sum(`amount`) as aggregate from `transactions_tb` where `amount` > 1) in C:\Users\Olaoluwa\Downloads\theother-framework\vendor\illuminate\database\Connection.php on line 712
+[2024-10-27 13:04:04] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 536
+[2024-10-27 13:04:04] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 536
+[2024-10-27 13:04:04] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 539
+[2024-10-27 13:04:04] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 539
+[2024-10-27 13:10:25] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:10:25] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:10:25] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:10:25] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:10:25] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:10:25] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:10:25] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:10:25] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:14:33] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:14:33] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:14:33] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:14:33] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:14:33] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:14:33] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:14:33] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:14:33] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:14:42] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:14:42] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:14:42] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:14:42] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:14:42] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:14:42] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:14:42] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:14:42] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:20:04] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:20:04] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:20:04] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:20:04] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:20:04] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:20:04] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:20:04] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:20:04] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:32:22] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:32:22] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:32:22] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:32:22] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:32:22] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:32:22] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:32:22] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:32:22] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:34:41] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:34:41] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:34:41] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:34:41] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:34:41] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:34:41] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:34:41] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:34:41] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:37:31] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:37:31] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 544
+[2024-10-27 13:37:31] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:37:31] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 547
+[2024-10-27 13:37:31] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:37:31] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 558
+[2024-10-27 13:37:31] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:37:31] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 561
+[2024-10-27 13:44:11] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 545
+[2024-10-27 13:44:11] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 545
+[2024-10-27 13:44:11] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 548
+[2024-10-27 13:44:11] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 548
+[2024-10-27 13:44:11] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 559
+[2024-10-27 13:44:11] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 559
+[2024-10-27 13:44:11] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 562
+[2024-10-27 13:44:11] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 562
+[2024-10-27 14:11:44] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 551
+[2024-10-27 14:11:44] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 551
+[2024-10-27 14:11:44] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 554
+[2024-10-27 14:11:44] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 554
+[2024-10-27 14:11:44] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 565
+[2024-10-27 14:11:44] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 565
+[2024-10-27 14:11:44] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 568
+[2024-10-27 14:11:44] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 568
+[2024-10-27 14:15:35] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 551
+[2024-10-27 14:15:35] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 551
+[2024-10-27 14:15:35] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 554
+[2024-10-27 14:15:35] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 554
+[2024-10-27 14:15:35] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 565
+[2024-10-27 14:15:35] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 565
+[2024-10-27 14:15:35] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 568
+[2024-10-27 14:15:35] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 568
+[2024-10-27 14:30:10] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 551
+[2024-10-27 14:30:10] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 551
+[2024-10-27 14:30:10] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 554
+[2024-10-27 14:30:10] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 554
+[2024-10-27 14:30:10] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 565
+[2024-10-27 14:30:10] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 565
+[2024-10-27 14:30:10] [ERROR] [2] Undefined variable $churnRate in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 568
+[2024-10-27 14:30:10] [ERROR] [2] Trying to access array offset on null in C:\Users\Olaoluwa\Downloads\theother-framework\resources\views\home.php on line 568
+[2024-10-27 14:45:27] [ERROR] Class "App\Controllers\CampaignController" not found in C:\Users\Olaoluwa\Downloads\theother-framework\src\Core\Router.php on line 73
+[2024-10-27 14:46:27] [ERROR] Missing parameter jp in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\CampaignController.php on line 40
+[2024-10-27 20:38:41] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:41] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:41] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:41] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:43] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:44] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:45] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:45] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:46] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:46] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:47] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:48] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:49] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:38:50] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:48] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:48] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:49] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:49] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:51] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:52] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:53] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:53] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:54] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:55] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:56] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:56] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:57] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 20:39:58] [ERROR] [2] Undefined array key "value" in C:\Users\Olaoluwa\Downloads\theother-framework\app\Helpers\AppHelper.php on line 333
+[2024-10-27 22:28:06] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 85
+[2024-10-27 22:28:07] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 90
+[2024-10-27 22:28:10] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 94
+[2024-10-27 22:28:11] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 98
+[2024-10-27 22:28:12] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 102
+[2024-10-27 22:28:14] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 106
+[2024-10-27 22:28:16] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 110
+[2024-10-27 22:30:02] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 85
+[2024-10-27 22:30:03] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 90
+[2024-10-27 22:30:05] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 94
+[2024-10-27 22:30:06] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 98
+[2024-10-27 22:30:07] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 102
+[2024-10-27 22:30:08] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 106
+[2024-10-27 22:30:09] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 110
+[2024-10-27 22:38:10] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 85
+[2024-10-27 22:38:11] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 90
+[2024-10-27 22:38:13] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 94
+[2024-10-27 22:38:15] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 98
+[2024-10-27 22:38:15] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 102
+[2024-10-27 22:38:17] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 106
+[2024-10-27 22:38:19] [ERROR] [2] Attempt to read property "code" on null in C:\Users\Olaoluwa\Downloads\theother-framework\app\Controllers\HomeController.php on line 110
