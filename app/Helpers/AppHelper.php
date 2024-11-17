@@ -3,6 +3,8 @@
 use App\Facades\Auth;
 use Illuminate\Database\Capsule\Manager as DB;
 use App\Facades\CustomDateTime;
+use App\Facades\Log;
+use Core\Logger;
 
 if (!function_exists('config')) {
     function config($key = null, $default = null)
@@ -327,9 +329,13 @@ if (!function_exists('get_percentage_difference')) {
     function get_percentage_difference($table, $column, $whereClauses = [], $interval = '1 day', $connection = 'default', $timeColumn = 'created_at', $formatted = false, $count = false)
     {
         try {
-            // Helper function to apply where clauses
+            // Validate where clauses
             $applyWhereClauses = function ($query) use ($whereClauses) {
                 foreach ($whereClauses as $clause) {
+                    if (!isset($clause['column'], $clause['value'])) {
+                        throw new \InvalidArgumentException("Invalid where clause: 'column' and 'value' keys are required.");
+                    }
+
                     $query->where($clause['column'], $clause['operator'] ?? '=', $clause['value']);
                 }
                 return $query;
@@ -371,9 +377,13 @@ if (!function_exists('get_percentage_difference')) {
             // Round to 2 decimal places
             return round($percentageDifference, 2);
         } catch (\Exception $e) {
+            $logger  = new Logger();
+            // Log error for debugging
+            $logger->error('Error in get_percentage_difference: ' . $e->getMessage());
             return 0;
         }
     }
+
 }
 
 

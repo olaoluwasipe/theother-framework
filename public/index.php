@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 use Core\Database;
 use Core\Logger;
@@ -14,7 +14,12 @@ $dotenv->load();
 new Database();
 
 // Load Eloquent
-require '../config/database.php';
+require __DIR__.'/../config/database.php';
+
+// Skip routing when running from CLI
+if (php_sapi_name() === 'cli') {
+    return;
+}
 
 // Initialize router
 $router = new Router();
@@ -37,7 +42,7 @@ register_shutdown_function(function() use ($logger) {
     }
 });
 
-require '../routes/web.php';
+require __DIR__.'/../routes/web.php';
 
 // Dispatch request
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

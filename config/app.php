@@ -2,7 +2,7 @@
 
 return [
     'name' => 'Advanced Dashboard',
-    'url' => 'http://localhost:8000',
+    'url' => 'http://dashboard.test',
     'debug' => true,
     'database' => [
         'driver' => 'mysql',

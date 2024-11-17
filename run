@@ -1,0 +1,28 @@
+<?php
+if (php_sapi_name() == 'cli') {
+    $action = $argv[1] ?? null;
+
+    switch ($action) {
+        case 'migrate':
+            require __DIR__ . '/src/DB/migrate.php';
+            break;
+        case 'rollback':
+            require __DIR__ . '/src/DB/rollback.php';
+            break;
+        case 'create:migration':
+        case 'create:controller':
+        case 'create:model':
+            $type = explode(':', $action)[1];
+            $name = $argv[2] ?? null;
+                
+            if (!$name) {
+                echo "Error: You must provide a name. Usage: php index.php create:$type [Name]\n";
+                exit(1);
+            }
+                
+            require __DIR__ . "/src/Core/Create.php";
+            break;
+        default:
+            echo "Usage: php index.php [migrate|rollback]\n";
+    }
+}

@@ -15,7 +15,7 @@ return [
         'connections' => [
             'default' => [
                 'driver'    => 'mysql',
-                'host'      => 'localhost',
+                'host'      => '127.0.0.1',
                 'database'  => 'campaign_chaser',
                 'username'  => 'root',
                 'password'  => '',
@@ -26,7 +26,7 @@ return [
 
             'mysql2' => [
                 'driver'    => 'mysql',
-                'host'      => 'localhost',
+                'host'      => '127.0.0.1',
                 'database'  => 'vas_core',
                 'username'  => 'root',
                 'password'  => '',
