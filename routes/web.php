@@ -14,7 +14,7 @@ $router->get('/campaign/{code}', 'CampaignController@index');
 $router->group(['middleware' => ['auth']], function($router) {
     $router->get('/', 'HomeController@index');
 
-    $router->get('/get-data', 'HomeController@getData');
+    $router->post('/get-data', 'HomeController@getData');
 
     $router->get('/get-data/{code}', 'HomeController@getCampaignData');
 

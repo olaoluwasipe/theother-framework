@@ -445,18 +445,28 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <h2 class="pageheader-title">E-commerce Dashboard Template </h2>
-                                    <div class="form-group">
-                                        <label for="campaign-chooser" class="col-form-label">Choose a campaign agency</label> 
-                                        <select class="form-control" id="campaign-chooser" name="campaign-chooser">
-                                            <option value="all" selected>All</option>
-                                            <?php
-                                            $campaignAgencies = App\Models\CampaignAgency::all();
-                                            foreach ($campaignAgencies as $campaignAgency) { 
-                                                echo '<option value="'.$campaignAgency->code.'">'.$campaignAgency->name.'</option>';
-                                            }
-                                            ?>
-                                        </select>
+                                    <h2 class="pageheader-title">Welcome, <?= auth()->name; ?> </h2>
+                                    <div style="gap: 20px" class="d-flex align-items-center g-3 gap-3 justify-content-center">
+                                        <div class="form-group">
+                                            <label for="campaign-chooser" class="col-form-label">Choose a campaign agency</label> 
+                                            <select class="form-control" id="campaign-chooser" name="campaign-chooser">
+                                                <option value="all" selected>All</option>
+                                                <?php
+                                                $campaignAgencies = App\Models\CampaignAgency::all();
+                                                foreach ($campaignAgencies as $campaignAgency) { 
+                                                    echo '<option value="'.$campaignAgency->code.'">'.$campaignAgency->name.'</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <?= csrf_field() ?>
+                                        <div class="form-group">
+                                            <label for="campaign-chooser" class="col-form-label">Choose a date range</label> 
+                                            <div style="gap: 10px" class="form-group d-flex align-items-end">
+                                                <input class="form-control" type="datetime-local" id="from" name="from" />
+                                                <input class="form-control" type="datetime-local" id="to" name="to" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
@@ -482,10 +492,10 @@
                                     <div class="card-body revenue">
                                         <h5 class="text-muted">Total Revenue</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1"><?php echo $revenue['total'] ?></h1>
+                                            <h1 class="mb-1"><?php echo $stats['revenue']['total'] ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-primary font-weight-bold">
-                                            <?php echo $revenue['percentage'] ?>
+                                            <?php echo $stats['revenue']['percentage'] ?>
                                         </div>
                                     </div>
                                     <div id="sparkline-revenue"></div>
@@ -496,10 +506,10 @@
                                     <div class="card-body subs">
                                         <h5 class="text-muted">Total Subs</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1"><?php echo $subs['total'] ?></h1>
+                                            <h1 class="mb-1"><?php echo $stats['subs']['total'] ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-primary font-weight-bold">
-                                            <?php echo $subs['percentage'] ?>
+                                            <?php echo $stats['subs']['percentage'] ?>
                                         </div>
                                     </div>
                                     <div id="sparkline-revenue2"></div>
@@ -510,10 +520,10 @@
                                     <div class="card-body unSubs">
                                         <h5 class="text-muted">Unsubs</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1"><?php echo $unSubs['total'] ?></h1>
+                                            <h1 class="mb-1"><?php echo $stats['stats']['unSubs']['total'] ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-primary font-weight-bold">
-                                            <span><?php echo $unSubs['percentage'] ?></span>
+                                            <span><?php echo $stats['unSubs']['percentage'] ?></span>
                                         </div>
                                     </div>
                                     <div id="sparkline-revenue3"></div>
@@ -524,10 +534,10 @@
                                     <div class="card-body subRev">
                                         <h5 class="text-muted">Subs Revenue</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1"><?php echo $subRev['total'] ?></h1>
+                                            <h1 class="mb-1"><?php echo $stats['subRev']['total'] ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
-                                            <span ><?php echo $subRev['percentage'] ?></span>
+                                            <span ><?php echo $stats['subRev']['percentage'] ?></span>
                                         </div>
                                     </div>
                                     <div id="sparkline-revenue4"></div>
@@ -538,10 +548,10 @@
                                     <div class="card-body renRev">
                                         <h5 class="text-muted">Renew Revenue</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1"><?php echo $renRev['total'] ?></h1>
+                                            <h1 class="mb-1"><?php echo $stats['renRev']['total'] ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
-                                            <span ><?php echo $renRev['percentage'] ?></span>
+                                            <span ><?php echo $stats['renRev']['percentage'] ?></span>
                                         </div>
                                     </div>
                                     <div id="renew-revenue4"></div>
@@ -552,15 +562,31 @@
                                     <div class="card-body churnRate">
                                         <h5 class="text-muted">Churn Rate</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1"><?php echo $churnRate['total'] ?></h1>
+                                            <h1 class="mb-1"><?php echo $stats['churnRate']['total'] ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
-                                            <span ><?php echo $churnRate['percentage'] ?></span>
+                                            <span ><?php echo $stats['churnRate']['percentage'] ?></span>
                                         </div>
                                     </div>
-                                    <div id="renew-revenue4"></div>
+                                    <div id="renew-revenue5"></div>
                                 </div>
                             </div>
+                            <script>
+                                $("#sparkline-revenue5").sparkline(revenueArr, {
+                                    type: 'line',
+                                    width: '99.5%',
+                                    height: '100',
+                                    lineColor: '#5969ff',
+                                    fillColor: '#dbdeff',
+                                    lineWidth: 2,
+                                    spotColor: undefined,
+                                    minSpotColor: undefined,
+                                    maxSpotColor: undefined,
+                                    highlightSpotColor: undefined,
+                                    highlightLineColor: undefined,
+                                    resize: true
+                                });
+                            </script>
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
@@ -1050,14 +1076,23 @@
 
 
 
-            function getData(code = '') {
+            function getData() {
                 // Construct the URL with JavaScript, allowing `code` to be dynamically included
-                if(code === 'all') {
-                    code = '';
-                }
-                const url = '<?php echo url('/get-data/') ?>' + code;
+                code = $("#campaign-chooser").val() == 'all' ? '' : $("campaign-chooser").val();
+                from = $("#from").val() ?? null;
+                to   = $("#to").val() ?? null;
+                csrf = $("input[name='csrf_token']").val()
 
-                $.get(url, function(response) {
+                const url = '<?php echo url('/get-data') ?>' ;
+
+                const data = {
+                    'agency': code,
+                    "from": from,
+                    "to": to,
+                    "csrf_token":csrf 
+                }
+
+                $.post(url, data, function(response) {
                     console.log(response);
                     if (response.status === 'success') {
                         const fullData = response.data; // Access 'stats' directly
@@ -1072,11 +1107,21 @@
             }
 
             $("#campaign-chooser").on("change", function() {
-                var selectedValue = $(this).val();
-                getData(selectedValue);
+                // var selectedValue = $(this).val();
+                getData();
             });
 
+            $("#from").on("change", function() {
+                getData()
+            })
+
+            $("#to").on("change", function() {
+                getData()
+            })
+
             getData();
+
+            setInterval(getData, 6000);
 
         });
         var revenueArr = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'amount', 'operator' => '>', 'value'=> 1]], 'day', 7, 'mysql2', 't_date', false )) ?>;

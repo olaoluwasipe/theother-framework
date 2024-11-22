@@ -822,3 +822,453 @@
 [2024-11-17 18:49:50] [ERROR] [2] Undefined array key 2 in /Users/mac/Documents/GitHub/theother-framework/app/Controllers/HomeController.php on line 118
 [2024-11-17 18:49:51] [ERROR] Error in get_percentage_difference: Invalid where clause: 'column' and 'value' keys are required.
 [2024-11-17 18:49:51] [ERROR] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* = ?' at line 1 (SQL: select sum(`amount`) as aggregate from `transactions` where * = You deactivate the service successfully.) in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Connection.php on line 712
+[2024-11-18 00:40:47] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 485
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 485
+[2024-11-18 00:40:47] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 488
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 488
+[2024-11-18 00:40:47] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 499
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 499
+[2024-11-18 00:40:47] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 502
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 502
+[2024-11-18 00:40:47] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 513
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 513
+[2024-11-18 00:40:47] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 516
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 516
+[2024-11-18 00:40:47] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 527
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 527
+[2024-11-18 00:40:47] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 530
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 530
+[2024-11-18 00:40:47] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 541
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 541
+[2024-11-18 00:40:47] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 544
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 544
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 555
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 558
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 569
+[2024-11-18 00:40:47] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 572
+[2024-11-18 00:46:22] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 485
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 485
+[2024-11-18 00:46:22] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 488
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 488
+[2024-11-18 00:46:22] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 499
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 499
+[2024-11-18 00:46:22] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 502
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 502
+[2024-11-18 00:46:22] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 513
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 513
+[2024-11-18 00:46:22] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 516
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 516
+[2024-11-18 00:46:22] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 527
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 527
+[2024-11-18 00:46:22] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 530
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 530
+[2024-11-18 00:46:22] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 541
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 541
+[2024-11-18 00:46:22] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 544
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 544
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 555
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 558
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 569
+[2024-11-18 00:46:22] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 572
+[2024-11-18 01:08:39] [ERROR] [FATAL] Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Connection.php on line 375
+[2024-11-18 01:08:43] [ERROR] [FATAL] Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Connection.php on line 375
+[2024-11-18 01:12:38] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 485
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 485
+[2024-11-18 01:12:38] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 488
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 488
+[2024-11-18 01:12:38] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 499
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 499
+[2024-11-18 01:12:38] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 502
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 502
+[2024-11-18 01:12:38] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 513
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 513
+[2024-11-18 01:12:38] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 516
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 516
+[2024-11-18 01:12:38] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 527
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 527
+[2024-11-18 01:12:38] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 530
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 530
+[2024-11-18 01:12:38] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 541
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 541
+[2024-11-18 01:12:38] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 544
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 544
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 555
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 558
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 569
+[2024-11-18 01:12:38] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 572
+[2024-11-18 01:15:36] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 500
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 500
+[2024-11-18 01:15:36] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 503
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 503
+[2024-11-18 01:15:36] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 514
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 514
+[2024-11-18 01:15:36] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 517
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 517
+[2024-11-18 01:15:36] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 528
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 528
+[2024-11-18 01:15:36] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 531
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 531
+[2024-11-18 01:15:36] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 542
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 542
+[2024-11-18 01:15:36] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 545
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 545
+[2024-11-18 01:15:36] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 556
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 556
+[2024-11-18 01:15:36] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 559
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 559
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 570
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 573
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 584
+[2024-11-18 01:15:36] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 587
+[2024-11-18 01:16:48] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 493
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 493
+[2024-11-18 01:16:48] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 496
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 496
+[2024-11-18 01:16:48] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 507
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 507
+[2024-11-18 01:16:48] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 510
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 510
+[2024-11-18 01:16:48] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 521
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 521
+[2024-11-18 01:16:48] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 524
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 524
+[2024-11-18 01:16:48] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 535
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 535
+[2024-11-18 01:16:48] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 538
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 538
+[2024-11-18 01:16:48] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 549
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 549
+[2024-11-18 01:16:48] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 552
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 552
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 563
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 566
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 577
+[2024-11-18 01:16:48] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 580
+[2024-11-18 01:18:59] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 493
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 493
+[2024-11-18 01:18:59] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 496
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 496
+[2024-11-18 01:18:59] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 507
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 507
+[2024-11-18 01:18:59] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 510
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 510
+[2024-11-18 01:18:59] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 521
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 521
+[2024-11-18 01:18:59] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 524
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 524
+[2024-11-18 01:18:59] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 535
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 535
+[2024-11-18 01:18:59] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 538
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 538
+[2024-11-18 01:18:59] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 549
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 549
+[2024-11-18 01:18:59] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 552
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 552
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 563
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 566
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 577
+[2024-11-18 01:18:59] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 580
+[2024-11-18 01:20:09] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:20:09] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:20:09] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:20:09] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:20:09] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:20:09] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:20:09] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:20:09] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:20:09] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:20:09] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 565
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 568
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 579
+[2024-11-18 01:20:09] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 582
+[2024-11-18 01:34:10] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:34:10] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:34:10] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:34:10] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:34:10] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:34:10] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:34:10] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:34:10] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:34:10] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:34:10] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 565
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 568
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 579
+[2024-11-18 01:34:10] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 582
+[2024-11-18 01:34:18] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:19] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:20] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:21] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:22] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:23] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:24] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:25] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:26] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:27] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:28] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:29] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:30] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:31] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:32] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:33] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:34] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:35] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:36] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:37] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:38] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:39] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:41] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:42] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:43] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:44] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:45] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:46] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:47] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:48] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:48] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:49] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:34:50] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:35:00] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:35:00] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:35:00] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:35:00] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:35:00] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:35:00] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:35:00] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:35:00] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:35:00] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:35:00] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 565
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 568
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 579
+[2024-11-18 01:35:00] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 582
+[2024-11-18 01:35:08] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:35:08] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:35:08] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:35:08] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:35:08] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:35:08] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:35:09] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:36:10] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:37:08] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:37:08] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:37:08] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:37:08] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:37:08] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:37:08] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:37:08] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:37:08] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:37:08] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:37:08] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 565
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 568
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 579
+[2024-11-18 01:37:08] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 582
+[2024-11-18 01:37:15] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:37:45] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:37:45] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:37:45] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:37:45] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:37:45] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:37:45] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:37:45] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:37:45] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:37:45] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:37:45] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 565
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 568
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 579
+[2024-11-18 01:37:45] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 582
+[2024-11-18 01:37:53] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:38:53] [ERROR] CSRF token validation failed in /Users/mac/Documents/GitHub/theother-framework/app/Helpers/AppHelper.php on line 131
+[2024-11-18 01:39:03] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:39:03] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:39:03] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:39:03] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:39:03] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:39:03] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:39:03] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:39:03] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:39:03] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:39:03] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 565
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 568
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 579
+[2024-11-18 01:39:03] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 582
+[2024-11-18 01:39:11] [ERROR] No query results for model [App\Models\CampaignAgency]. in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Eloquent/Builder.php on line 527
+[2024-11-18 01:40:12] [ERROR] No query results for model [App\Models\CampaignAgency]. in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Eloquent/Builder.php on line 527
+[2024-11-18 01:40:39] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:40:39] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:40:39] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:40:39] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:40:39] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:40:39] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:40:39] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:40:39] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:40:39] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:40:39] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 565
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 568
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 579
+[2024-11-18 01:40:39] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 582
+[2024-11-18 01:44:49] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 495
+[2024-11-18 01:44:49] [ERROR] [2] Undefined variable $revenue in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 498
+[2024-11-18 01:44:49] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 509
+[2024-11-18 01:44:49] [ERROR] [2] Undefined variable $subs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 512
+[2024-11-18 01:44:49] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:44:49] [ERROR] [2] Undefined variable $unSubs in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 526
+[2024-11-18 01:44:49] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 537
+[2024-11-18 01:44:49] [ERROR] [2] Undefined variable $subRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 540
+[2024-11-18 01:44:49] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 551
+[2024-11-18 01:44:49] [ERROR] [2] Undefined variable $renRev in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 554
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 565
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 568
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 579
+[2024-11-18 01:44:49] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 582
+[2024-11-18 01:49:18] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:49:18] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:49:18] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:49:18] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 579
+[2024-11-18 01:49:18] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 582
+[2024-11-18 01:57:57] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:57:57] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:57:57] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 01:57:57] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-18 01:57:57] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-18 01:59:22] [ERROR] [2] Undefined variable $serviceIDs in /Users/mac/Documents/GitHub/theother-framework/app/Controllers/HomeController.php on line 69
+[2024-11-18 01:59:22] [ERROR] Illuminate\Database\Query\Builder::cleanBindings(): Argument #1 ($bindings) must be of type array, null given, called in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 997 in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 3369
+[2024-11-18 01:59:22] [ERROR] [2] Undefined variable $serviceIDs in /Users/mac/Documents/GitHub/theother-framework/app/Controllers/HomeController.php on line 69
+[2024-11-18 01:59:22] [ERROR] Illuminate\Database\Query\Builder::cleanBindings(): Argument #1 ($bindings) must be of type array, null given, called in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 997 in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 3369
+[2024-11-18 01:59:22] [ERROR] [2] Undefined variable $serviceIDs in /Users/mac/Documents/GitHub/theother-framework/app/Controllers/HomeController.php on line 69
+[2024-11-18 01:59:22] [ERROR] Illuminate\Database\Query\Builder::cleanBindings(): Argument #1 ($bindings) must be of type array, null given, called in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 997 in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 3369
+[2024-11-18 01:59:22] [ERROR] [2] Undefined variable $serviceIDs in /Users/mac/Documents/GitHub/theother-framework/app/Controllers/HomeController.php on line 69
+[2024-11-18 01:59:22] [ERROR] Illuminate\Database\Query\Builder::cleanBindings(): Argument #1 ($bindings) must be of type array, null given, called in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 997 in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 3369
+[2024-11-18 01:59:22] [ERROR] [2] Undefined variable $serviceIDs in /Users/mac/Documents/GitHub/theother-framework/app/Controllers/HomeController.php on line 69
+[2024-11-18 01:59:22] [ERROR] Illuminate\Database\Query\Builder::cleanBindings(): Argument #1 ($bindings) must be of type array, null given, called in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 997 in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 3369
+[2024-11-18 01:59:22] [ERROR] [2] Undefined variable $serviceIDs in /Users/mac/Documents/GitHub/theother-framework/app/Controllers/HomeController.php on line 69
+[2024-11-18 01:59:22] [ERROR] Illuminate\Database\Query\Builder::cleanBindings(): Argument #1 ($bindings) must be of type array, null given, called in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 997 in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 3369
+[2024-11-18 01:59:22] [ERROR] [2] Undefined variable $serviceIDs in /Users/mac/Documents/GitHub/theother-framework/app/Controllers/HomeController.php on line 69
+[2024-11-18 01:59:22] [ERROR] Illuminate\Database\Query\Builder::cleanBindings(): Argument #1 ($bindings) must be of type array, null given, called in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 997 in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 3369
+[2024-11-18 01:59:24] [ERROR] [2] Undefined variable $serviceIDs in /Users/mac/Documents/GitHub/theother-framework/app/Controllers/HomeController.php on line 69
+[2024-11-18 01:59:24] [ERROR] Illuminate\Database\Query\Builder::cleanBindings(): Argument #1 ($bindings) must be of type array, null given, called in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 997 in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Query/Builder.php on line 3369
+[2024-11-18 02:00:55] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 02:00:55] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 02:00:55] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 02:00:55] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-18 02:00:55] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-18 14:22:28] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 14:22:28] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 14:22:28] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 14:22:28] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-18 14:22:28] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-18 14:27:28] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 14:27:28] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 14:27:28] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 14:27:28] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-18 14:27:28] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-18 21:40:04] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 21:40:04] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 21:40:04] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-18 21:40:04] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-18 21:40:04] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-19 01:31:03] [ERROR] Error in get_percentage_difference: SQLSTATE[HY000] [2002] Connection refused (SQL: select count(*) as aggregate from `transactions` where `t_date` <= DATE_SUB(NOW(), INTERVAL 7 day) and `amount` > 1 and `charges_status` = Success and `bearer_id` <> system-renewal)
+[2024-11-19 01:31:03] [ERROR] SQLSTATE[HY000] [2002] Connection refused (SQL: select sum(`amount`) as aggregate from `transactions` where `service_id` in (234102200006875, 234102200006876, 234102200006874) and `amount` > 1 and `charges_status` = Success and `bearer_id` = system-renewal) in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Connection.php on line 712
+[2024-11-19 01:31:03] [ERROR] SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `games`) in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Connection.php on line 712
+[2024-11-19 01:31:03] [ERROR] SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `games`) in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Connection.php on line 712
+[2024-11-19 01:31:03] [ERROR] SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `games`) in /Users/mac/Documents/GitHub/theother-framework/vendor/illuminate/database/Connection.php on line 712
+[2024-11-20 09:27:01] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-20 09:27:01] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-20 09:27:01] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-20 09:27:01] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-20 09:27:01] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-21 11:41:42] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-21 11:41:42] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-21 11:41:42] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-21 11:41:42] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-21 11:41:42] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-21 20:36:22] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-21 20:36:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-21 20:36:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-21 20:36:22] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-21 20:36:22] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
