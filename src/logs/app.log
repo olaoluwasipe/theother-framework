@@ -1272,3 +1272,57 @@
 [2024-11-21 20:36:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
 [2024-11-21 20:36:22] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
 [2024-11-21 20:36:22] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-24 11:40:37] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 11:40:37] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 11:40:37] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 11:40:37] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-24 11:40:37] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-24 11:55:25] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 11:55:25] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 11:55:25] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 11:55:25] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-24 11:55:25] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-24 12:30:33] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 12:30:33] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 12:30:33] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 12:30:33] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-24 12:30:33] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-24 12:38:40] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 12:38:40] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 12:38:40] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 12:38:40] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-24 12:38:40] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-24 14:41:17] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 14:41:17] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 14:41:17] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-24 14:41:17] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-24 14:41:17] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-25 10:14:52] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-25 10:14:52] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-25 10:14:52] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-25 10:14:52] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-25 10:14:52] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-25 10:48:07] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-25 10:48:07] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-25 10:48:07] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-25 10:48:07] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-25 10:48:07] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-25 11:12:22] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-25 11:12:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-25 11:12:22] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-25 11:12:22] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-25 11:12:22] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598
+[2024-11-25 11:13:09] [ERROR] Too few arguments to function Core\Router::get(), 1 passed in /Users/mac/Documents/GitHub/theother-framework/routes/web.php on line 14 and at least 2 expected in /Users/mac/Documents/GitHub/theother-framework/src/Core/Router.php on line 21
+[2024-11-25 11:13:09] [ERROR] Too few arguments to function Core\Router::get(), 1 passed in /Users/mac/Documents/GitHub/theother-framework/routes/web.php on line 14 and at least 2 expected in /Users/mac/Documents/GitHub/theother-framework/src/Core/Router.php on line 21
+[2024-11-25 11:13:09] [ERROR] Too few arguments to function Core\Router::get(), 1 passed in /Users/mac/Documents/GitHub/theother-framework/routes/web.php on line 14 and at least 2 expected in /Users/mac/Documents/GitHub/theother-framework/src/Core/Router.php on line 21
+[2024-11-25 11:13:09] [ERROR] Too few arguments to function Core\Router::get(), 1 passed in /Users/mac/Documents/GitHub/theother-framework/routes/web.php on line 14 and at least 2 expected in /Users/mac/Documents/GitHub/theother-framework/src/Core/Router.php on line 21
+[2024-11-25 11:13:09] [ERROR] Too few arguments to function Core\Router::get(), 1 passed in /Users/mac/Documents/GitHub/theother-framework/routes/web.php on line 14 and at least 2 expected in /Users/mac/Documents/GitHub/theother-framework/src/Core/Router.php on line 21
+[2024-11-25 11:13:09] [ERROR] Too few arguments to function Core\Router::get(), 1 passed in /Users/mac/Documents/GitHub/theother-framework/routes/web.php on line 14 and at least 2 expected in /Users/mac/Documents/GitHub/theother-framework/src/Core/Router.php on line 21
+[2024-11-25 11:13:10] [ERROR] Too few arguments to function Core\Router::get(), 1 passed in /Users/mac/Documents/GitHub/theother-framework/routes/web.php on line 14 and at least 2 expected in /Users/mac/Documents/GitHub/theother-framework/src/Core/Router.php on line 21
+[2024-11-25 11:13:14] [ERROR] syntax error, unexpected token "}", expecting ";" in /Users/mac/Documents/GitHub/theother-framework/routes/web.php on line 16
+[2024-11-25 11:13:16] [ERROR] syntax error, unexpected token "}", expecting ";" in /Users/mac/Documents/GitHub/theother-framework/routes/web.php on line 16
+[2024-11-25 11:23:59] [ERROR] [2] Undefined array key "stats" in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-25 11:23:59] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-25 11:23:59] [ERROR] [2] Trying to access array offset on null in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 523
+[2024-11-25 11:23:59] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 595
+[2024-11-25 11:23:59] [ERROR] [2] Trying to access array offset on float in /Users/mac/Documents/GitHub/theother-framework/resources/views/home.php on line 598

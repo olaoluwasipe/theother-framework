@@ -1,6 +1,7 @@
 {
     "name": "theother-framework/core",
     "require": {
+        "php": "^8.0",
         "illuminate/database": "^8.0",
         "vlucas/phpdotenv": "^5.6"
     },

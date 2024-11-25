@@ -11,6 +11,10 @@ $router->get('/logout', 'AuthController@logout');
 
 $router->get('/campaign/{code}', 'CampaignController@index');
 
+$router->get('/phpinfo', function() {
+    return phpinfo();
+});
+
 $router->group(['middleware' => ['auth']], function($router) {
     $router->get('/', 'HomeController@index');
 
