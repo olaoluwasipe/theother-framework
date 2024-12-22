@@ -29,6 +29,20 @@
         });
     });
 
+    function getLastNDaysLabels(n) {
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const labels = [];
+        const today = new Date();
+    
+        for (let i = n - 1; i >= 0; i--) {
+            const date = new Date();
+            date.setDate(today.getDate() - i);
+            labels.push(daysOfWeek[date.getDay()]);
+        }
+    
+        return labels;
+    }
+
 
 
 
@@ -93,10 +107,11 @@
     // Customer acquisition
     // ============================================================== 
     var chart = new Chartist.Line('.ct-chart', {
-        labels: ['Mon', 'Tue', 'Wed'],
+        labels: getLastNDaysLabels(4),
+        // labels: ['Mon', 'Tue', 'Wed', 'Thu'],
         series: [
-            [1, 5, 2, 5],
-            [2, 3, 4, 8]
+            renewals,
+            subscriptions
 
         ]
     }, {

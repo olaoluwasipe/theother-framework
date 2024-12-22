@@ -1,9 +1,11 @@
 <?php
 
 use App\Facades\Auth;
+use Core\CacheService;
 use Illuminate\Database\Capsule\Manager as DB;
 use App\Facades\CustomDateTime;
 use App\Facades\Log;
+use Core\CacheManager;
 use Core\Logger;
 
 if (!function_exists('config')) {
@@ -42,28 +44,29 @@ if (!function_exists('config')) {
 if (!function_exists('redirect')) {
     function redirect($url = null)
     {
+        // If no URL is provided, use the base URL from the config
         if (is_null($url)) {
-            $url = '/';
+            $url = config('app.url');
         }
 
         // Ensure the URL is safe by filtering and sanitizing
         $url = filter_var($url, FILTER_SANITIZE_URL);
 
-        // Validate URL format
-        if (!filter_var($url, FILTER_VALIDATE_URL) && !str_starts_with($url, '/')) {
-            $url = '/' . ltrim($url, '/');
+        // If the URL is a relative path, prepend the base URL from the config
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            $url = rtrim(config('app.url'), '/') . '/' . ltrim($url, '/');
         }
 
-        // Prevent header injection
+        // Prevent header injection by cleaning any dangerous characters in the URL
         $url = str_replace(["\r", "\n", '%0d', '%0a'], '', $url);
 
-        // Perform the redirect
+        // Check if headers have already been sent, if not perform the redirect
         if (!headers_sent()) {
             header('Location: ' . $url, true, 302);
             exit();
         }
 
-        // Fallback for when headers are already sent
+        // Fallback: JavaScript and meta refresh for browsers with JS disabled
         echo '<script>window.location.href = "' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '";</script>';
         echo '<noscript><meta http-equiv="refresh" content="0;url=' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8') . '"></noscript>';
         exit();
@@ -96,7 +99,7 @@ if (!function_exists('url')) {
     function url($path = '')
     {
         $basePath = config('app.url');
-        return $basePath . '/' . ltrim($path, '/');
+        return $basePath . ltrim($path, '/');
     }
 }
 
@@ -326,65 +329,145 @@ if (!function_exists('format_phone_number')) {
 }
 
 if (!function_exists('get_percentage_difference')) {
-    function get_percentage_difference($table, $column, $whereClauses = [], $interval = '1 day', $connection = 'default', $timeColumn = 'created_at', $formatted = false, $count = false)
-    {
+    function get_percentage_difference(
+        $table,
+        $column,
+        $whereClauses = [],
+        $interval = '1',
+        $connection = 'default',
+        $timeColumn = 'created_at',
+        $formatted = false,
+        $count = false,
+        $cacheTTL = 3600 // Cache time-to-live in seconds
+    ) {
         try {
-            // Validate where clauses
-            $applyWhereClauses = function ($query) use ($whereClauses) {
-                foreach ($whereClauses as $clause) {
-                    if (!isset($clause['column'], $clause['value'])) {
-                        throw new \InvalidArgumentException("Invalid where clause: 'column' and 'value' keys are required.");
+            $cacheService = new CacheService();
+            $cache = $cacheService->getCache();
+            // Generate a unique cache key
+            $cacheKey = "percentage_difference:{$table}:{$column}:{$interval}:"
+                . md5(json_encode($whereClauses) . $timeColumn . ($count ? 'count' : 'sum'));
+    
+            // Use caching for the computed results
+            $values = $cache->remember($cacheKey, '3600', function () use (
+                $table,
+                $column,
+                $whereClauses,
+                $interval,
+                $connection,
+                $timeColumn,
+                $count
+            ) {
+                // Precompute timestamp for interval
+                $intervalTime = now()->sub(new \DateInterval('P' . $interval . 'D'));
+    
+                // Build base query with where clauses
+                $buildQuery = function ($query) use ($whereClauses) {
+                    foreach ($whereClauses as $clause) {
+                        if (!isset($clause['column'], $clause['value'])) {
+                            throw new \InvalidArgumentException("Invalid where clause: 'column' and 'value' keys are required.");
+                        }
+    
+                        $query->where($clause['column'], $clause['operator'] ?? '=', $clause['value']);
                     }
-
-                    $query->where($clause['column'], $clause['operator'] ?? '=', $clause['value']);
-                }
-                return $query;
-            };
-
-            // Get current value
-            if ($count) {
-                $currentValue = $applyWhereClauses(DB::connection($connection)->table($table))->count();
-            } else {
-                $currentValue = $applyWhereClauses(DB::connection($connection)->table($table))->sum($column);
-            }
-
-            // Get previous value based on interval
-            if ($count) {
-                $previousValue = $applyWhereClauses(DB::connection($connection)
-                    ->table($table)
-                    ->where($timeColumn, '<=', DB::raw("DATE_SUB(NOW(), INTERVAL {$interval})")))
-                    ->count();
-            } else {
-                $previousValue = $applyWhereClauses(DB::connection($connection)
-                    ->table($table)
-                    ->where($timeColumn, '<=', DB::raw("DATE_SUB(NOW(), INTERVAL {$interval})")))
-                    ->sum($column);
-            }
-
-            // If previous value is 0, return 100% increase
+                    return $query;
+                };
+    
+                // Create base query for the table
+                $baseQuery = $buildQuery(DB::connection($connection)->table($table));
+    
+                // Fetch current and previous values in a single query
+                return $baseQuery->selectRaw("
+                    SUM(CASE WHEN {$timeColumn} > ? THEN {$column} ELSE 0 END) AS current_value,
+                    SUM(CASE WHEN {$timeColumn} <= ? THEN {$column} ELSE 0 END) AS previous_value
+                ", [$intervalTime, $intervalTime])
+                    ->first();
+            });
+    
+            // Extract current and previous values
+            $currentValue = $count ? ($values->current_value ?: 0) : $values->current_value;
+            $previousValue = $count ? ($values->previous_value ?: 0) : $values->previous_value;
+    
+            // Handle edge case: no previous value
             if ($previousValue == 0) {
                 return $currentValue > 0 ? 100 : 0;
             }
-
+    
             // Calculate percentage difference
             $difference = $currentValue - $previousValue;
             $percentageDifference = ($difference / $previousValue) * 100;
-
-            if ($formatted) {
-                return format_percentage($difference, $percentageDifference);
-            }
-
-            // Round to 2 decimal places
-            return round($percentageDifference, 2);
+    
+            return $formatted ? format_percentage($difference, $percentageDifference) : round($percentageDifference, 2);
         } catch (\Exception $e) {
-            $logger  = new Logger();
-            // Log error for debugging
+            $logger = new Logger();
             $logger->error('Error in get_percentage_difference: ' . $e->getMessage());
             return 0;
         }
     }
+    
 
 }
+
+// if (!function_exists('get_percentage_difference')) {
+//     function get_percentage_difference($table, $column, $whereClauses = [], $interval = '1 day', $connection = 'default', $timeColumn = 'created_at', $formatted = false, $count = false)
+//     {
+//         try {
+//             // Validate where clauses
+//             $applyWhereClauses = function ($query) use ($whereClauses) {
+//                 foreach ($whereClauses as $clause) {
+//                     if (!isset($clause['column'], $clause['value'])) {
+//                         throw new \InvalidArgumentException("Invalid where clause: 'column' and 'value' keys are required.");
+//                     }
+
+//                     $query->where($clause['column'], $clause['operator'] ?? '=', $clause['value']);
+//                 }
+//                 return $query;
+//             };
+
+//             // Get current value
+//             if ($count) {
+//                 $currentValue = $applyWhereClauses(DB::connection($connection)->table($table))->count();
+//             } else {
+//                 $currentValue = $applyWhereClauses(DB::connection($connection)->table($table))->sum($column);
+//             }
+
+//             // Get previous value based on interval
+//             if ($count) {
+//                 $previousValue = $applyWhereClauses(DB::connection($connection)
+//                     ->table($table)
+//                     ->where($timeColumn, '<=', DB::raw("DATE_SUB(NOW(), INTERVAL {$interval})")))
+//                     ->count();
+//             } else {
+//                 $previousValue = $applyWhereClauses(DB::connection($connection)
+//                     ->table($table)
+//                     ->where($timeColumn, '<=', DB::raw("DATE_SUB(NOW(), INTERVAL {$interval})")))
+//                     ->sum($column);
+//             }
+
+//             // If previous value is 0, return 100% increase
+//             if ($previousValue == 0) {
+//                 return $currentValue > 0 ? 100 : 0;
+//             }
+
+//             // Calculate percentage difference
+//             $difference = $currentValue - $previousValue;
+//             $percentageDifference = ($difference / $previousValue) * 100;
+
+//             if ($formatted) {
+//                 return format_percentage($difference, $percentageDifference);
+//             }
+
+//             // Round to 2 decimal places
+//             return round($percentageDifference, 2);
+//         } catch (\Exception $e) {
+//             $logger  = new Logger();
+//             // Log error for debugging
+//             $logger->error('Error in get_percentage_difference: ' . $e->getMessage());
+//             return 0;
+//         }
+//     }
+
+// }
+
 
 
 if (!function_exists('format_percentage')) {
@@ -417,11 +500,23 @@ if (!function_exists('now')) {
 }
 
 if (!function_exists('get_interval_data')) {
-    function get_interval_data($table, $column, $whereClauses = [], $interval = 'day', $amount = 7, $connection = 'default', $timeColumn = 'created_at', $count = false, $formatted = false)
-    {
+    function get_interval_data(
+        $table,
+        $column,
+        $whereClauses = [],
+        $interval = 'day',
+        $amount = 7,
+        $connection = 'default',
+        $timeColumn = 'created_at',
+        $count = false,
+        $formatted = false,
+        $cacheTTL = 3600 // Time-to-live for cache
+    ) {
         try {
+            $cacheService = new CacheService();
+            $cache = $cacheService->getCache();
             $data = [];
-
+            
             // Helper function to apply where clauses
             $applyWhereClauses = function ($query) use ($whereClauses) {
                 foreach ($whereClauses as $clause) {
@@ -429,23 +524,33 @@ if (!function_exists('get_interval_data')) {
                 }
                 return $query;
             };
-
+    
             for ($i = $amount - 1; $i >= 0; $i--) {
-                // Calculate the interval's start and end time
-                $startTime = DB::raw("DATE_SUB(NOW(), INTERVAL {$i} {$interval})");
-                $endTime = DB::raw("DATE_SUB(NOW(), INTERVAL " . ($i + 1) . " {$interval})");
-
-                // Query for each interval with where clauses
-                $query = DB::connection($connection)
-                    ->table($table)
-                    ->where($timeColumn, '<=', $startTime)
-                    ->where($timeColumn, '>', $endTime);
-
-                // Apply additional where clauses
-                $query = $applyWhereClauses($query);
-
-                $intervalValue = $count ? $query->count() : $query->sum($column);
-
+                // Generate a cache key for the interval
+                $cacheKey = "interval_data:{$table}:{$interval}:{$i}:"
+                    . md5(json_encode($whereClauses) . ($count ? 'count' : 'sum') . $column);
+                
+                // Check the cache first
+                $intervalValue = $cache->remember($cacheKey, $cacheTTL, function () use (
+                    $applyWhereClauses, $connection, $table, $timeColumn, $interval, $i, $column, $count
+                ) {
+                    // Calculate the interval's start and end time
+                    $startTime = DB::raw("DATE_SUB(NOW(), INTERVAL {$i} {$interval})");
+                    $endTime = DB::raw("DATE_SUB(NOW(), INTERVAL " . ($i + 1) . " {$interval})");
+    
+                    // Build the query
+                    $query = DB::connection($connection)
+                        ->table($table)
+                        ->where($timeColumn, '<=', $startTime)
+                        ->where($timeColumn, '>', $endTime);
+    
+                    // Apply additional where clauses
+                    $query = $applyWhereClauses($query);
+    
+                    // Return either count or sum
+                    return $count ? $query->count() : $query->sum($column);
+                });
+    
                 // Determine the key label based on the interval type
                 if ($formatted) {
                     $label = match ($interval) {
@@ -454,19 +559,20 @@ if (!function_exists('get_interval_data')) {
                         'week' => 'Week ' . (new DateTime())->modify("-{$i} weeks")->format('W'), // e.g., 'Week 42'
                         default => (new DateTime())->modify("-{$i} days")->format('Y-m-d'), // default to full date for custom intervals
                     };
-
+    
                     // Add to data array with the label as the key
                     $data[$label] = $intervalValue;
                 } else {
                     $data[] = $intervalValue;
                 }
             }
-
+    
             return $data;
         } catch (\Exception $e) {
             return [];
         }
     }
+    
 }
 
 

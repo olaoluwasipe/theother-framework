@@ -1,0 +1,16 @@
+1734222407a:6:{s:7:"revenue";a:2:{s:5:"total";s:16:"₦62,656,200.00";s:10:"percentage";s:200:"
+            <div class="metric-label d-inline-block float-right text-danger font-weight-bold">
+                <span><i class="fa fa-fw fa-arrow-down"></i></span><span>-100%</span>
+            </div>";}s:4:"subs";a:2:{s:5:"total";s:6:"52,898";s:10:"percentage";s:200:"
+            <div class="metric-label d-inline-block float-right text-danger font-weight-bold">
+                <span><i class="fa fa-fw fa-arrow-down"></i></span><span>-100%</span>
+            </div>";}s:6:"unSubs";a:2:{s:5:"total";s:6:"23,700";s:10:"percentage";i:0;}s:6:"subRev";a:2:{s:5:"total";s:13:"₦277,600.00";s:10:"percentage";s:200:"
+            <div class="metric-label d-inline-block float-right text-danger font-weight-bold">
+                <span><i class="fa fa-fw fa-arrow-down"></i></span><span>-100%</span>
+            </div>";}s:6:"renRev";a:2:{s:5:"total";s:16:"₦62,378,500.00";s:10:"percentage";s:200:"
+            <div class="metric-label d-inline-block float-right text-danger font-weight-bold">
+                <span><i class="fa fa-fw fa-arrow-down"></i></span><span>-100%</span>
+            </div>";}s:9:"churnRate";a:2:{s:5:"total";s:6:"26.38%";s:10:"percentage";s:200:"
+            <div class="metric-label d-inline-block float-right text-danger font-weight-bold">
+                <span><i class="fa fa-fw fa-arrow-down"></i></span><span>-100%</span>
+            </div>";}}

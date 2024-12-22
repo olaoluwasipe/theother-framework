@@ -4,6 +4,8 @@ namespace App\Middleware;
 
 class StartSession {
     public function handle() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
     }
 }

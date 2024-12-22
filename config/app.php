@@ -2,7 +2,9 @@
 
 return [
     'name' => 'Advanced Dashboard',
-    'url' => 'http://dashboard.test',
+    'url' => 'http://yellofc.com/point/',
+    'folder' => '/point',
+    'public_path' => 'http://yellofc.com/point/public/',
     'debug' => true,
     'database' => [
         'driver' => 'mysql',

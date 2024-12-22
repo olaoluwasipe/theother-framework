@@ -6,18 +6,19 @@ class Logger {
 
     public function __construct($logFile = 'app.log') {
         // Set the log file path
-        $this->logFile = __DIR__ . '/../logs/' . $logFile;
+        // $this->logFile = __DIR__ . '/../logs/' . $logFile;
 
-        // Create logs directory if it doesn't exist
-        if (!file_exists(dirname($this->logFile))) {
-            mkdir(dirname($this->logFile), 0755, true);
-        }
+        // // Create logs directory if it doesn't exist
+        // if (!file_exists(dirname($this->logFile))) {
+        //     mkdir(dirname($this->logFile), 0755, true);
+        // }
     }
 
     public function log($message, $level = 'INFO') {
         // Prepare the log message
         $date = date('Y-m-d H:i:s');
         $logMessage = "[$date] [$level] $message" . PHP_EOL;
+        return true;
 
         // Write the log message to the log file
         file_put_contents($this->logFile, $logMessage, FILE_APPEND);

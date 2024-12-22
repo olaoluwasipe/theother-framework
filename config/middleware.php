@@ -43,7 +43,8 @@ return [
     */
     'groups' => [
         'web' => [
-            'auth',
+            // 'auth',
+            \App\Middleware\AuthMiddleware::class,
             \App\Middleware\StartSession::class,
             \App\Middleware\VerifyCsrfToken::class,
         ],

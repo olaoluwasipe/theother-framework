@@ -15,10 +15,10 @@ return [
         'connections' => [
             'default' => [
                 'driver'    => 'mysql',
-                'host'      => '127.0.0.1',
+                'host'      => 'localhost',
                 'database'  => 'campaign_chaser',
-                'username'  => 'root',
-                'password'  => '',
+                'username'  => 'new_web',
+                'password'  => 'K33pfit#',
                 'charset'   => 'utf8',
                 'collation' => 'utf8_unicode_ci',
                 'prefix'    => '',
@@ -26,10 +26,10 @@ return [
 
             'mysql2' => [
                 'driver'    => 'mysql',
-                'host'      => '127.0.0.1',
+                'host'      => 'localhost',
                 'database'  => 'vas_core',
-                'username'  => 'root',
-                'password'  => '',
+                'username'  => 'new_web',
+                'password'  => 'K33pfit#',
                 'charset'   => 'utf8',
                 'collation' => 'utf8_unicode_ci',
                 'prefix'    => '',

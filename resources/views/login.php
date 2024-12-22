@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="../assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/libs/css/style.css">
-    <link rel="stylesheet" href="../assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" href="<?= config('app.public_path') ?>assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="<?= config('app.public_path') ?>assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= config('app.public_path') ?>assets/libs/css/style.css">
+    <link rel="stylesheet" href="<?= config('app.public_path') ?>assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
     <style>
     html,
     body {
@@ -34,7 +34,7 @@
     <!-- ============================================================== -->
     <div class="splash-container">
         <div class="card ">
-            <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="../assets/images/logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
+            <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="<?= config('app.public_path') ?>/assets/images/logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
             <div class="card-body">
                 <form id="signIn" action="login" method="post">
                     <div class="form-group">
@@ -66,9 +66,9 @@
     <!-- end login page  -->
     <!-- ============================================================== -->
     <!-- Optional JavaScript -->
-    <script src="../assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="<?= config('app.public_path') ?>assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="<?= config('app.public_path') ?>assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script>
         $(document).ready(function() {
             $("#signIn").submit(function(event) {
@@ -76,7 +76,7 @@
                 var formData = new FormData(this);
                 $.ajax({
                     type: "POST",
-                    url: "/login",
+                    url: "<?= config('app.url') ?>login",
                     data: formData,
                     processData: false, // Prevent jQuery from converting the form data into a query string
                     contentType: false, // Let the browser set the correct content type (multipart/form-data)

@@ -1,5 +1,10 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors",1);
 require __DIR__.'/../vendor/autoload.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 use Core\Database;
 use Core\Logger;
@@ -23,24 +28,24 @@ if (php_sapi_name() === 'cli') {
 
 // Initialize router
 $router = new Router();
-$logger = new Logger();
+// $logger = new Logger();
 
 // Set error handlers
-set_error_handler(function($errno, $errstr, $errfile, $errline) use ($logger) {
-    $logger->error("[$errno] $errstr in $errfile on line $errline");
-});
+// set_error_handler(function($errno, $errstr, $errfile, $errline) use ($logger) {
+//     $logger->error("[$errno] $errstr in $errfile on line $errline");
+// });
 
-set_exception_handler(function($exception) use ($logger) {
-    $logger->error($exception->getMessage() . ' in ' . $exception->getFile() . ' on line ' . $exception->getLine());
-});
+// set_exception_handler(function($exception) use ($logger) {
+//     $logger->error($exception->getMessage() . ' in ' . $exception->getFile() . ' on line ' . $exception->getLine());
+// });
 
-// Log fatal errors
-register_shutdown_function(function() use ($logger) {
-    $error = error_get_last();
-    if ($error !== null && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
-        $logger->error("[FATAL] {$error['message']} in {$error['file']} on line {$error['line']}");
-    }
-});
+// // Log fatal errors
+// register_shutdown_function(function() use ($logger) {
+//     $error = error_get_last();
+//     if ($error !== null && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+//         $logger->error("[FATAL] {$error['message']} in {$error['file']} on line {$error['line']}");
+//     }
+// });
 
 require __DIR__.'/../routes/web.php';
 
