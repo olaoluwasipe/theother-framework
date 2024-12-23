@@ -499,6 +499,31 @@ if (!function_exists('now')) {
     }
 }
 
+if(!function_exists('transformToInteger')) {
+    function transformToInteger($value) {
+        // Remove commas, currency symbols, and percentage signs
+        if (strpos($value, '₦') !== false || strpos($value, ',') !== false) {
+            // Handle currency format
+            $cleanedValue = preg_replace('/[₦,]/', '', $value);
+            return (int) $cleanedValue;
+        }
+        
+        if (strpos($value, '%') !== false) {
+            // Handle percentage format
+            $cleanedValue = str_replace('%', '', $value);
+            return (int) floatval($cleanedValue);
+        }
+        
+        // Throw an exception if the format is not recognized
+        throw new InvalidArgumentException("Input format not recognized. Supported formats: '₦', ',', '%'.");
+    }
+    
+    // Examples
+    // echo transformToInteger("₦95,688,500") . PHP_EOL; // Output: 95688500
+    // echo transformToInteger("31.29%") . PHP_EOL;      // Output: 31
+    
+}
+
 if (!function_exists('get_interval_data')) {
     function get_interval_data(
         $table,

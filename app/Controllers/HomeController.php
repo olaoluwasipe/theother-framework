@@ -30,63 +30,88 @@ class HomeController extends Controller {
         // Cache time-to-live in seconds
         $cacheTTL = 3600;
 
-        // Helper function to cache a specific stat
-        $getCachedStat = function ($key, $callback) use ($cacheTTL) {
-            return $this->cache->remember($key, $cacheTTL, $callback);
+        // Fetch the last update time from the cache
+        $lastUpdateTimeKey = 'stats:last_update_time';
+        $lastUpdateTime = $this->cache->get($lastUpdateTimeKey, now()->subDays(1));
+
+        // Fetch new transactions since the last update
+        $newTransactionsQuery = (clone $baseQuery)->where('t_date', '>', $lastUpdateTime);
+
+        // Update the last update time in the cache
+        $this->cache->put($lastUpdateTimeKey, now(), $cacheTTL);
+
+        // Helper function to update a specific cached stat
+        $updateCachedStat = function ($key, $newValue) use ($cacheTTL) {
+            $cachedValue = $this->cache->get($key, 0);
+            $updatedValue = transformToInteger($cachedValue) + $newValue;
+            $this->cache->put($key, $updatedValue, $cacheTTL);
+            if(strpos($cachedValue, '%') === true) {
+                return number_format($updatedValue, 2) . '%';
+            }
+            if(strpos($cachedValue, '₦') === true) {
+                return '₦' . number_format($updatedValue, 2);
+            }
+            return $updatedValue;
         };
 
-        // Generate the stats
+        // Generate and update stats
         return [
             'revenue' => [
-                'total' => $getCachedStat('stats:revenue:total', function () use ($baseQuery) {
-                    return format_money((clone $baseQuery)->where('amount', '>', 1)->sum('amount'));
-                }),
-                'percentage' => $getCachedStat('stats:revenue:percentage', function () {
+                'total' => $updateCachedStat(
+                    'stats:revenue:total',
+                    (clone $newTransactionsQuery)->where('amount', '>', 1)->sum('amount')
+                ),
+                'percentage' => $this->cache->remember('stats:revenue:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1]], '7', 'mysql2', 't_date', true);
                 }),
             ],
             'subs' => [
-                'total' => $getCachedStat('stats:subs:total', function () use ($baseQuery) {
-                    return number_format((clone $baseQuery)->where('amount', '>=', 0)->where('charges_status', 'Success')->where('bearer_id', 'SecureD')->count());
-                }),
-                'percentage' => $getCachedStat('stats:subs:percentage', function () {
+                'total' => $updateCachedStat(
+                    'stats:subs:total',
+                    (clone $newTransactionsQuery)->where('amount', '>=', 0)->where('charges_status', 'Success')->where('bearer_id', 'SecureD')->count()
+                ),
+                'percentage' => $this->cache->remember('stats:subs:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1], ['column' => 'charges_status', 'value' => 'Success'], ['column' => 'bearer_id', 'value' => 'SecureD']], '7', 'mysql2', 't_date', true, true);
                 }),
             ],
             'unSubs' => [
-                'total' => $getCachedStat('stats:unSubs:total', function () use ($baseQuery) {
-                    return number_format((clone $baseQuery)->where('charges_status', 'You deactivate the service successfully.')->count());
-                }),
-                'percentage' => $getCachedStat('stats:unSubs:percentage', function () {
+                'total' => $updateCachedStat(
+                    'stats:unSubs:total',
+                    (clone $newTransactionsQuery)->where('charges_status', 'You deactivate the service successfully.')->count()
+                ),
+                'percentage' => $this->cache->remember('stats:unSubs:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', '*', [['column' => 'charges_status', 'value' => 'You deactivate the service successfully.']], '7', 'mysql2', 't_date', true, true);
                 }),
             ],
             'subRev' => [
-                'total' => $getCachedStat('stats:subRev:total', function () use ($baseQuery) {
-                    return format_money((clone $baseQuery)->where('amount', '>', 1)->where('charges_status', 'Success')->where('bearer_id', '<>', 'system-renewal')->sum('amount'));
-                }),
-                'percentage' => $getCachedStat('stats:subRev:percentage', function () {
+                'total' => $updateCachedStat(
+                    'stats:subRev:total',
+                    (clone $newTransactionsQuery)->where('amount', '>', 1)->where('charges_status', 'Success')->where('bearer_id', '<>', 'system-renewal')->sum('amount')
+                ),
+                'percentage' => $this->cache->remember('stats:subRev:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1], ['column' => 'charges_status', 'value' => 'Success'], ['column' => 'bearer_id', 'operator' => '<>', 'value' => 'system-renewal']], '7', 'mysql2', 't_date', true, true);
                 }),
             ],
             'renRev' => [
-                'total' => $getCachedStat('stats:renRev:total', function () use ($baseQuery) {
-                    return format_money((clone $baseQuery)->where('amount', '>', 1)->where('charges_status', 'Success')->where('bearer_id', '=', 'system-renewal')->sum('amount'));
-                }),
-                'percentage' => $getCachedStat('stats:renRev:percentage', function () {
+                'total' => $updateCachedStat(
+                    'stats:renRev:total',
+                    (clone $newTransactionsQuery)->where('amount', '>', 1)->where('charges_status', 'Success')->where('bearer_id', '=', 'system-renewal')->sum('amount')
+                ),
+                'percentage' => $this->cache->remember('stats:renRev:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1], ['column' => 'charges_status', 'value' => 'Success'], ['column' => 'bearer_id', 'value' => 'system-renewal']], '7', 'mysql2', 't_date', true, true);
                 }),
             ],
             'churnRate' => [
-                'total' => $getCachedStat('stats:churnRate:total', function () {
+                'total' => $this->cache->remember('stats:churnRate:total', $cacheTTL, function () {
                     return number_format($this->getChurnRate(), 2) . '%';
                 }),
-                'percentage' => $getCachedStat('stats:churnRate:percentage', function () {
+                'percentage' => $this->cache->remember('stats:churnRate:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1], ['column' => 'charges_status', 'value' => 'Success'], ['column' => 'bearer_id', 'value' => 'system-renewal']], '7', 'mysql2', 't_date', true, true);
                 }),
             ],
         ];
     }
+
 
 
     private function getGraphData() {
@@ -147,19 +172,23 @@ class HomeController extends Controller {
         $logger->info('Query: ' . $query->toSql());
         $logger->info('Bindings: ' . json_encode($query->getBindings()));
 
+        // Generate a unique cache key based on filters
+        $filtersKey = md5(json_encode($_POST));
+
         // Paginate the query (10 items per page)
         $paginatedResults = $query->paginate(10);
 
         return json_success([
-            'stats' => $this->cache->remember('data_stats:' . md5(json_encode($_POST)), 3600, function () use ($query) {
+            'stats' => $this->cache->remember('data_stats:' . $filtersKey, 3600, function () use ($query) {
                 return $this->getBasicStats($query);
             }),
-            'graphs' => $this->cache->remember('data_graphs', 3600, function () {
+            'graphs' => $this->cache->remember('data_graphs:' . $filtersKey, 3600, function () {
                 return $this->getGraphData();
             }),
             'pagination' => $paginatedResults, // Add the paginated results to the response
         ]);
     }
+
 
 
     public function getCampaignData($code)
