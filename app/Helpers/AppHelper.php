@@ -515,7 +515,8 @@ if(!function_exists('transformToInteger')) {
         }
         
         // Throw an exception if the format is not recognized
-        throw new InvalidArgumentException("Input format not recognized. Supported formats: '₦', ',', '%'.");
+        // throw new InvalidArgumentException("Input format not recognized. Supported formats: '₦', ',', '%'.");
+        return (int) $value;
     }
     
     // Examples
