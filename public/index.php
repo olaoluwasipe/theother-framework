@@ -5,6 +5,7 @@ use Core\Database;
 use Core\Logger;
 use Core\Router;
 use Dotenv\Dotenv;
+use Illuminate\Pagination\Paginator;
 
 // Load environment
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
@@ -12,6 +13,8 @@ $dotenv->load();
 
 // Initialize the database connection
 new Database();
+$cacheService = new \Core\CacheService();
+$cache = $cacheService->getCache();
 
 // Load Eloquent
 require __DIR__.'/../config/database.php';

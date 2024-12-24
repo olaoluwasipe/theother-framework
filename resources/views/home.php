@@ -448,6 +448,18 @@
                                     <h2 class="pageheader-title">Welcome, <?= auth()->name; ?> </h2>
                                     <div style="gap: 20px" class="d-flex align-items-center g-3 gap-3 justify-content-center">
                                         <div class="form-group">
+                                            <label for="service" class="col-form-label">Choose a Service</label> 
+                                            <select class="form-control" id="service" name="service">
+                                                <option value="all" selected>All</option>
+                                                <?php
+                                                $services = App\Models\Game::all();
+                                                foreach ($services as $service) { 
+                                                    echo '<option value="'.$service->code.'">'.$service->name.'</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="campaign-chooser" class="col-form-label">Choose a campaign agency</label> 
                                             <select class="form-control" id="campaign-chooser" name="campaign-chooser">
                                                 <option value="all" selected>All</option>
@@ -520,7 +532,7 @@
                                     <div class="card-body unSubs">
                                         <h5 class="text-muted">Unsubs</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1"><?php echo $stats['stats']['unSubs']['total'] ?></h1>
+                                            <h1 class="mb-1"><?php echo $stats['unSubs']['total'] ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-primary font-weight-bold">
                                             <span><?php echo $stats['unSubs']['percentage'] ?></span>
@@ -571,31 +583,15 @@
                                     <div id="renew-revenue5"></div>
                                 </div>
                             </div>
-                            <script>
-                                $("#sparkline-revenue5").sparkline(revenueArr, {
-                                    type: 'line',
-                                    width: '99.5%',
-                                    height: '100',
-                                    lineColor: '#5969ff',
-                                    fillColor: '#dbdeff',
-                                    lineWidth: 2,
-                                    spotColor: undefined,
-                                    minSpotColor: undefined,
-                                    maxSpotColor: undefined,
-                                    highlightSpotColor: undefined,
-                                    highlightLineColor: undefined,
-                                    resize: true
-                                });
-                            </script>
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="text-muted">Campaign Subs</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1"><?php echo $churnRate['total'] ?></h1>
+                                            <h1 class="mb-1"><?php echo $stats['churnRate']['total'] ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
-                                            <span ><?php echo $churnRate['percentage'] ?></span>
+                                            <span ><?php echo $stats['churnRate']['percentage'] ?></span>
                                         </div>
                                     </div>
                                     <div id="renew-revenue4"></div>
@@ -673,12 +669,12 @@
                                         <div class="text-center">
                                             <span class="legend-item mr-2">
                                                     <span class="fa-xs text-primary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                            <span class="legend-text">Returning</span>
+                                            <span class="legend-text">Renewals</span>
                                             </span>
                                             <span class="legend-item mr-2">
 
                                                     <span class="fa-xs text-secondary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                            <span class="legend-text">First Time</span>
+                                            <span class="legend-text">Subscriptions</span>
                                             </span>
                                         </div>
                                     </div>
@@ -1129,6 +1125,8 @@
         var unSubArr = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column' => 'charges_status', 'operator' => '=', 'value'=>'You deactivate the service successfully.']], 'day', 7, 'mysql2', 't_date', true )) ?>;
         var subRevArr = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'amount', 'operator' => '>', 'value'=> 1],['column'=> 'charges_status', 'value'=> 'Success'], ['column'=> 'bearer_id', 'operator'=> '<>', 'value'=> 'system-renewal']], 'day', 7, 'mysql2', 't_date', )) ?>;
         var renRevArr = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'amount', 'operator' => '>', 'value'=> 1],['column'=> 'charges_status', 'value'=> 'Success'], ['column'=> 'bearer_id', 'operator'=> '=', 'value'=> 'system-renewal']], 'day', 7, 'mysql2', 't_date', )) ?>;
+        var renewals = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'amount', 'operator' => '>', 'value'=> 1],['column'=> 'charges_status', 'value'=> 'Success'], ['column'=> 'bearer_id', 'operator'=> '=', 'value'=> 'system-renewal']], 'day', 4, 'mysql2', 't_date', true )) ?>;
+        var subscriptions = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'charges_status', 'value'=> 'Success'], ['column'=> 'bearer_id', 'operator'=> '<>', 'value'=> 'system-renewal']], 'day', 4, 'mysql2', 't_date', true )) ?>;
     </script>
     <script src="assets/libs/js/dashboard-ecommerce.js"></script>
 </body>
