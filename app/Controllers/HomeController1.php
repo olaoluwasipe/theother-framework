@@ -12,58 +12,45 @@ use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Support\Facades\Cache;
 use Core\CacheService;
 
-class HomeController extends Controller {
+class HomeController1 extends Controller {
 
     protected $cache;
 
-    protected $logger;
-
     public function __construct() {
         $cacheService = new CacheService();
-        $this->logger = new Logger();
         $this->cache = $cacheService->getCache();
     }
     
     private function getBasicStats($query = null)
     {
-        // Initialize the base query
         $services = Game::all();
         $serviceIDs = $services->pluck('service_id');
-        $baseQuery = $query ?? Transaction::query()->whereIn('service_id', $serviceIDs);
+        $baseQuery = $query ?? Transaction::query()->whereIn('service_id', $serviceIDs)->where('t_date', '>=', now()->subDays(7));
 
         // Cache time-to-live in seconds
         $cacheTTL = 3600;
 
-        // Fetch the last update time from the cache, or default to 1 day ago
+        // Fetch the last update time from the cache
         $lastUpdateTimeKey = 'stats:last_update_time';
         $lastUpdateTime = $this->cache->get($lastUpdateTimeKey, now()->subDays(1));
 
         // Fetch new transactions since the last update
         $newTransactionsQuery = (clone $baseQuery)->where('t_date', '>', $lastUpdateTime);
 
-        // After fetching new transactions, update the last update time in the cache
+        // Update the last update time in the cache
         $this->cache->put($lastUpdateTimeKey, now(), $cacheTTL);
 
         // Helper function to update a specific cached stat
         $updateCachedStat = function ($key, $newValue) use ($cacheTTL) {
-            // Get the cached value or default to 0 if it doesn't exist
             $cachedValue = $this->cache->get($key, 0);
-            $this->logger->info('Cached value for ' . $key . ': ' . $cachedValue);
-            
-            // Ensure both values are properly converted to integers before addition
-            $updatedValue = transformToInteger($cachedValue) + transformToInteger($newValue);
-
-            // Update the cache with the new value
+            $updatedValue = transformToInteger($cachedValue) + $newValue;
             $this->cache->put($key, $updatedValue, $cacheTTL);
-
-            // Handle specific formats (e.g., percentage, currency)
-            if (strpos($cachedValue, '%') !== false) {
+            if(strpos($cachedValue, '%') === true) {
                 return number_format($updatedValue, 2) . '%';
             }
-            if (strpos($cachedValue, '₦') !== false || strpos($newValue, '₦') !== false) {
+            if(strpos($cachedValue, '₦') === true || strpos($cachedValue, 'NGN') === true) {
                 return '₦' . number_format($updatedValue, 2);
             }
-
             return $updatedValue;
         };
 
@@ -72,7 +59,7 @@ class HomeController extends Controller {
             'revenue' => [
                 'total' => $updateCachedStat(
                     'stats:revenue:total',
-                    format_money((clone $newTransactionsQuery)->where('amount', '>', 0)->where('charges_status', 'Success')->sum('amount'))
+                    (clone $newTransactionsQuery)->where('amount', '>', 1)->sum('amount')
                 ),
                 'percentage' => $this->cache->remember('stats:revenue:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1]], '7', 'mysql2', 't_date', true);
@@ -81,7 +68,7 @@ class HomeController extends Controller {
             'subs' => [
                 'total' => $updateCachedStat(
                     'stats:subs:total',
-                    number_format((clone $newTransactionsQuery)->where('amount', '>=', 0)->where('charges_status', 'Success')->where('bearer_id', 'SecureD')->count())
+                    (clone $newTransactionsQuery)->where('amount', '>=', 0)->where('charges_status', 'Success')->where('bearer_id', 'SecureD')->count()
                 ),
                 'percentage' => $this->cache->remember('stats:subs:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1], ['column' => 'charges_status', 'value' => 'Success'], ['column' => 'bearer_id', 'value' => 'SecureD']], '7', 'mysql2', 't_date', true, true);
@@ -90,7 +77,7 @@ class HomeController extends Controller {
             'unSubs' => [
                 'total' => $updateCachedStat(
                     'stats:unSubs:total',
-                    number_format((clone $newTransactionsQuery)->where('charges_status', 'You deactivate the service successfully.')->count())
+                    (clone $newTransactionsQuery)->where('charges_status', 'You deactivate the service successfully.')->count()
                 ),
                 'percentage' => $this->cache->remember('stats:unSubs:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', '*', [['column' => 'charges_status', 'value' => 'You deactivate the service successfully.']], '7', 'mysql2', 't_date', true, true);
@@ -99,7 +86,7 @@ class HomeController extends Controller {
             'subRev' => [
                 'total' => $updateCachedStat(
                     'stats:subRev:total',
-                    format_money((clone $newTransactionsQuery)->where('amount', '>', 1)->where('charges_status', 'Success')->where('bearer_id', '<>', 'system-renewal')->sum('amount'))
+                    (clone $newTransactionsQuery)->where('amount', '>', 1)->where('charges_status', 'Success')->where('bearer_id', '<>', 'system-renewal')->sum('amount')
                 ),
                 'percentage' => $this->cache->remember('stats:subRev:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1], ['column' => 'charges_status', 'value' => 'Success'], ['column' => 'bearer_id', 'operator' => '<>', 'value' => 'system-renewal']], '7', 'mysql2', 't_date', true, true);
@@ -108,7 +95,7 @@ class HomeController extends Controller {
             'renRev' => [
                 'total' => $updateCachedStat(
                     'stats:renRev:total',
-                    format_money((clone $newTransactionsQuery)->where('amount', '>', 1)->where('charges_status', 'Success')->where('bearer_id', '=', 'system-renewal')->sum('amount'))
+                    (clone $newTransactionsQuery)->where('amount', '>', 1)->where('charges_status', 'Success')->where('bearer_id', '=', 'system-renewal')->sum('amount')
                 ),
                 'percentage' => $this->cache->remember('stats:renRev:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1], ['column' => 'charges_status', 'value' => 'Success'], ['column' => 'bearer_id', 'value' => 'system-renewal']], '7', 'mysql2', 't_date', true, true);
@@ -139,11 +126,7 @@ class HomeController extends Controller {
 
     public function index()
     {
-        $this->cache->clear();
         $services = Game::all();
-
-        $date['initial'] = now()->subDays(1)->format('Y-m-d\TH:i');
-        $date['final'] = now()->format('Y-m-d\TH:i');
 
         // Cache the basic stats and churn rate for 1 hour
         $stats = $this->cache->remember('basic_stats', 3600, function () {
@@ -159,7 +142,7 @@ class HomeController extends Controller {
             return $this->getReport();
         });
 
-        return view('home', compact('stats', 'services', 'report', 'churnRate', 'date'));
+        return view('home', compact('stats', 'services', 'report', 'churnRate'));
     }
 
     public function getData()
@@ -185,15 +168,12 @@ class HomeController extends Controller {
         }
 
         // Logging the query and bindings
-        $this->logger->info('Query: ' . $query->toSql());
-        $this->logger->info('Bindings: ' . json_encode($query->getBindings()));
+        $logger = new Logger();
+        $logger->info('Query: ' . $query->toSql());
+        $logger->info('Bindings: ' . json_encode($query->getBindings()));
 
         // Generate a unique cache key based on filters
         $filtersKey = md5(json_encode($_POST));
-
-        // Invalidate the cache for the key before querying
-        $this->cache->forget('data_stats:' . $filtersKey);
-        $this->cache->forget('data_graphs:' . $filtersKey);
 
         // Paginate the query (10 items per page)
         $paginatedResults = $query->paginate(10);

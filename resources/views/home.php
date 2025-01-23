@@ -475,8 +475,8 @@
                                         <div class="form-group">
                                             <label for="campaign-chooser" class="col-form-label">Choose a date range</label> 
                                             <div style="gap: 10px" class="form-group d-flex align-items-end">
-                                                <input class="form-control" type="datetime-local" id="from" name="from" />
-                                                <input class="form-control" type="datetime-local" id="to" name="to" />
+                                                <input class="form-control" type="datetime-local" value="<?php echo $date['initial'] ?>" id="from" name="from" />
+                                                <input class="form-control" type="datetime-local" value="<?php echo $date['final'] ?>" id="to" name="to" />
                                             </div>
                                         </div>
                                     </div>
@@ -1070,14 +1070,12 @@
                 });
             }
 
-
-
             function getData() {
                 // Construct the URL with JavaScript, allowing `code` to be dynamically included
-                code = $("#campaign-chooser").val() == 'all' ? '' : $("campaign-chooser").val();
-                from = $("#from").val() ?? null;
-                to   = $("#to").val() ?? null;
-                csrf = $("input[name='csrf_token']").val()
+                let code = $("#campaign-chooser").val() == 'all' ? '' : $("#campaign-chooser").val();
+                let from = $("#from").val() ?? null;
+                let to   = $("#to").val() ?? null;
+                let csrf = $("input[name='csrf_token']").val();
 
                 const url = '<?php echo url('get-data') ?>' ;
 
@@ -1085,7 +1083,7 @@
                     'agency': code,
                     "from": from,
                     "to": to,
-                    "csrf_token":csrf 
+                    "csrf_token": csrf
                 }
 
                 $.post(url, data, function(response) {
@@ -1099,27 +1097,27 @@
                     }
                 }).fail(function(jqXHR, textStatus, errorThrown) {
                     console.error("AJAX request failed:", textStatus, errorThrown);
+                    console.error("Response:", jqXHR.responseText); // More detailed error info
                 });
             }
 
             $("#campaign-chooser").on("change", function() {
-                // var selectedValue = $(this).val();
                 getData();
             });
 
             $("#from").on("change", function() {
-                getData()
-            })
+                getData();
+            });
 
             $("#to").on("change", function() {
-                getData()
-            })
+                getData();
+            });
 
-            getData();
+            getData(); // Trigger initial data load
 
-            setInterval(getData, 6000);
-
+            setInterval(getData, 6000); // Corrected setInterval call
         });
+
         var revenueArr = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'amount', 'operator' => '>', 'value'=> 1]], 'day', 7, 'mysql2', 't_date', false )) ?>;
         var subsArr = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'amount', 'operator' => '>', 'value'=> 1],['column'=> 'charges_status', 'value'=> 'Success'], ['column'=> 'bearer_id', 'value'=> 'SecureD']], 'day', 7, 'mysql2', 't_date', true, )) ?>;
         var unSubArr = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column' => 'charges_status', 'operator' => '=', 'value'=>'You deactivate the service successfully.']], 'day', 7, 'mysql2', 't_date', true )) ?>;

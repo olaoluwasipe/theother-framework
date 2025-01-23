@@ -138,7 +138,7 @@ class HomeController2 extends Controller
 
     private function generateStats($query = null)
     {
-        $query = $query ?? Transaction::query();
+        $query = $query ?? Transaction::query()->where('t_date', '>', DB::raw('NOW() - INTERVAL 10 DAY'));
         return [
             'revenue' => $this->calculateStats($query, 'amount', '>', 1),
             'subs' => $this->calculateStats($query, 'amount', '>=', 0, [
