@@ -475,8 +475,8 @@
                                         <div class="form-group">
                                             <label for="campaign-chooser" class="col-form-label">Choose a date range</label> 
                                             <div style="gap: 10px" class="form-group d-flex align-items-end">
-                                                <input class="form-control" type="datetime-local" value="<?php echo $date['initial'] ?>" id="from" name="from" />
-                                                <input class="form-control" type="datetime-local" value="<?php echo $date['final'] ?>" id="to" name="to" />
+                                                <input class="form-control" type="date" data-date="<?php echo $date['initial'] ?>" id="from" name="from" />
+                                                <input class="form-control" type="date" data-date="<?php echo $date['final'] ?>" id="to" name="to" />
                                             </div>
                                         </div>
                                     </div>
@@ -1055,36 +1055,56 @@
     <script src="<?= config('app.public_path') ?>assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script>
         $(document).ready(function() {
+            // Cache DOM elements to avoid querying multiple times
+            const $campaignChooser = $("#campaign-chooser");
+            const $from = $("#from");
+            const $to = $("#to");
+            const $csrfToken = $("input[name='csrf_token']");
+            const $statsContainer = $(".stats-container");
+
+            // Initialize the fullData array
             var $fullData = [];
 
+            // Function to update stats
             function updateStats(stats) {
                 Object.entries(stats).forEach(([key, value]) => {
-                    var parent = $("." + key);
-                    parent.find("h1").text(value.total);
-                    const metricLabel = parent.find(".metric-label");
-                    metricLabel.empty().append(`<span>${value.percentage}</span>`);
-                    // parent.find(".metric-label > span").html(value.percentage);
+                    var $parent = $("." + key);
+                    
+                    // Update the total value only if it has changed
+                    const $h1 = $parent.find("h1");
+                    if ($h1.text() !== value.total) {
+                        $h1.text(value.total);
+                    }
+
+                    // Update the percentage label only if it has changed
+                    const $metricLabel = $parent.find(".metric-label");
+                    if ($metricLabel.text() !== value.percentage) {
+                        $metricLabel.empty().append(`<span>${value.percentage}</span>`);
+                    }
+
+                    // Log the subKey and subValue for debugging purposes
                     Object.entries(value).forEach(([subKey, subValue]) => {
                         console.log(`    ${subKey}: ${subValue}`);
                     });
                 });
             }
 
+            // Function to get data from the server
             function getData() {
                 // Construct the URL with JavaScript, allowing `code` to be dynamically included
-                let code = $("#campaign-chooser").val() == 'all' ? '' : $("#campaign-chooser").val();
-                let from = $("#from").val() ?? null;
-                let to   = $("#to").val() ?? null;
-                let csrf = $("input[name='csrf_token']").val();
+                let code = $campaignChooser.val() == 'all' ? '' : $campaignChooser.val();
+                let from = $from.val() ?? null;
+                let to   = $to.val() ?? null;
+                let csrf = $csrfToken.val();
 
-                const url = '<?php echo url('get-data') ?>' ;
+                const url = '<?php echo url('get-data') ?>';
 
                 const data = {
                     'agency': code,
                     "from": from,
                     "to": to,
                     "csrf_token": csrf
-                }
+                };
 
                 $.post(url, data, function(response) {
                     console.log(response);
@@ -1101,22 +1121,18 @@
                 });
             }
 
-            $("#campaign-chooser").on("change", function() {
-                getData();
-            });
+            // Trigger the data fetch when filters change
+            $campaignChooser.on("change", getData);
+            $from.on("change", getData);
+            $to.on("change", getData);
 
-            $("#from").on("change", function() {
-                getData();
-            });
+            // Trigger initial data load
+            getData();
 
-            $("#to").on("change", function() {
-                getData();
-            });
-
-            getData(); // Trigger initial data load
-
-            setInterval(getData, 6000); // Corrected setInterval call
+            // Periodically refresh data every 6 seconds
+            setInterval(getData, 6000);
         });
+
 
         var revenueArr = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'amount', 'operator' => '>', 'value'=> 1]], 'day', 7, 'mysql2', 't_date', false )) ?>;
         var subsArr = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'amount', 'operator' => '>', 'value'=> 1],['column'=> 'charges_status', 'value'=> 'Success'], ['column'=> 'bearer_id', 'value'=> 'SecureD']], 'day', 7, 'mysql2', 't_date', true, )) ?>;

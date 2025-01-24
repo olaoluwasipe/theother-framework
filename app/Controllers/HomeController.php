@@ -31,6 +31,10 @@ class HomeController extends Controller {
         $serviceIDs = $services->pluck('service_id');
         $baseQuery = $query ?? Transaction::query()->whereIn('service_id', $serviceIDs);
 
+        $filtersKey = 'data_stats:' . $_SESSION['filters'];
+
+        $filters = $this->cache->get($filtersKey);
+
         // Cache time-to-live in seconds
         $cacheTTL = 3600;
 
@@ -39,19 +43,24 @@ class HomeController extends Controller {
         $lastUpdateTime = $this->cache->get($lastUpdateTimeKey, now()->subDays(1));
 
         // Fetch new transactions since the last update
-        $newTransactionsQuery = (clone $baseQuery)->where('t_date', '>', $lastUpdateTime);
+        $newTransactionsQuery = ($query || $filters ? $query : null) ?? (clone $baseQuery)->where('t_date', '>', $lastUpdateTime);
 
         // After fetching new transactions, update the last update time in the cache
         $this->cache->put($lastUpdateTimeKey, now(), $cacheTTL);
 
         // Helper function to update a specific cached stat
-        $updateCachedStat = function ($key, $newValue) use ($cacheTTL) {
+        $updateCachedStat = function ($key, $newValue) use ($cacheTTL, $filters, $query) {
             // Get the cached value or default to 0 if it doesn't exist
             $cachedValue = $this->cache->get($key, 0);
             $this->logger->info('Cached value for ' . $key . ': ' . $cachedValue);
             
             // Ensure both values are properly converted to integers before addition
-            $updatedValue = transformToInteger($cachedValue) + transformToInteger($newValue);
+            if($filters !== null || $filters !== '' || $query !== null) {
+                $updatedValue = transformToInteger($newValue);
+            } else {
+                $updatedValue = transformToInteger($cachedValue) + transformToInteger($newValue);
+            }
+            // $updatedValue = transformToInteger($cachedValue) + transformToInteger($newValue);
 
             // Update the cache with the new value
             $this->cache->put($key, $updatedValue, $cacheTTL);
@@ -62,6 +71,9 @@ class HomeController extends Controller {
             }
             if (strpos($cachedValue, '₦') !== false || strpos($newValue, '₦') !== false) {
                 return '₦' . number_format($updatedValue, 2);
+            }
+            if (strpos($newValue, ',') !== false) {
+                return number_format($updatedValue);
             }
 
             return $updatedValue;
@@ -194,6 +206,8 @@ class HomeController extends Controller {
         // Invalidate the cache for the key before querying
         $this->cache->forget('data_stats:' . $filtersKey);
         $this->cache->forget('data_graphs:' . $filtersKey);
+
+        $_SESSION['filters'] = $filtersKey;
 
         // Paginate the query (10 items per page)
         $paginatedResults = $query->paginate(10);
