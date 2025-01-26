@@ -33,13 +33,18 @@ class HomeController extends Controller {
 
         $filtersKey = null;
         $filters = null;
-        if (isset($_SESSION['filters'])) {
+
+        // Check if filters are set in the session
+        if (!empty($_SESSION['filters'])) {
             $filtersKey = 'data_stats:' . $_SESSION['filters'];
             $filters = $this->cache->get($filtersKey);
         }
-        // $filtersKey = 'data_stats:' . $_SESSION['filters'];
 
-        // $filters = $this->cache->get($filtersKey);
+        // If filters are not set, you might want to handle a fallback scenario
+        if (is_null($filters)) {
+            // Example: set default filters or log that no filters were found
+            $filters = []; // Default value (optional)
+        }
 
         // Cache time-to-live in seconds
         $cacheTTL = 3600;
