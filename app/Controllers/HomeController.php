@@ -31,9 +31,15 @@ class HomeController extends Controller {
         $serviceIDs = $services->pluck('service_id');
         $baseQuery = $query ?? Transaction::query()->whereIn('service_id', $serviceIDs);
 
-        $filtersKey = 'data_stats:' . $_SESSION['filters'];
+        $filtersKey = null;
+        $filters = null;
+        if (isset($_SESSION['filters'])) {
+            $filtersKey = 'data_stats:' . $_SESSION['filters'];
+            $filters = $this->cache->get($filtersKey);
+        }
+        // $filtersKey = 'data_stats:' . $_SESSION['filters'];
 
-        $filters = $this->cache->get($filtersKey);
+        // $filters = $this->cache->get($filtersKey);
 
         // Cache time-to-live in seconds
         $cacheTTL = 3600;
@@ -93,7 +99,7 @@ class HomeController extends Controller {
             'subs' => [
                 'total' => $updateCachedStat(
                     'stats:subs:total',
-                    number_format((clone $newTransactionsQuery)->where('amount', '>=', 0)->where('charges_status', 'Success')->where('bearer_id', 'SecureD')->count())
+                    number_format((clone $newTransactionsQuery)->whereNotNull('amount')->where('bearer_id', 'SecureD')->count())
                 ),
                 'percentage' => $this->cache->remember('stats:subs:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1], ['column' => 'charges_status', 'value' => 'Success'], ['column' => 'bearer_id', 'value' => 'SecureD']], '7', 'mysql2', 't_date', true, true);
