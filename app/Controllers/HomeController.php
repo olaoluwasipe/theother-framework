@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Facades\Auth;
 use App\Helpers\CacheManager;
 use App\Models\CampaignAgency;
+use App\Models\CampaignLog;
 use App\Models\Game;
 use App\Models\Transaction;
 use Core\Controller;
@@ -24,12 +25,13 @@ class HomeController extends Controller {
         $this->cache = $cacheService->getCache();
     }
     
-    private function getBasicStats($query = null)
-    {
+    private function getBasicStats($query = null, $campaignQuery = null) {
+
         // Initialize the base query
         $services = Game::all();
         $serviceIDs = $services->pluck('service_id');
         $baseQuery = $query ?? Transaction::query()->whereIn('service_id', $serviceIDs);
+        $campaignQuery = $campaignQuery ?? CampaignLog::query();
 
         $filtersKey = null;
         $filters = null;
@@ -55,6 +57,7 @@ class HomeController extends Controller {
 
         // Fetch new transactions since the last update
         $newTransactionsQuery = ($query || $filters ? $query : null) ?? (clone $baseQuery)->where('t_date', '>', $lastUpdateTime);
+        $newCampaignQuery = ($campaignQuery || $filters ? $campaignQuery : null) ?? (clone $campaignQuery)->where('t_date', '>', $lastUpdateTime);
 
         // After fetching new transactions, update the last update time in the cache
         $this->cache->put($lastUpdateTimeKey, now(), $cacheTTL);
@@ -104,7 +107,7 @@ class HomeController extends Controller {
             'subs' => [
                 'total' => $updateCachedStat(
                     'stats:subs:total',
-                    number_format((clone $newTransactionsQuery)->whereNotNull('amount')->where('bearer_id', 'SecureD')->count())
+                    (isset($_POST['agency'])) ? number_format((clone $newCampaignQuery)->where('status', 1)->count()) : number_format((clone $newTransactionsQuery)->whereNotNull('amount')->where('bearer_id', 'SecureD')->count())
                 ),
                 'percentage' => $this->cache->remember('stats:subs:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1], ['column' => 'charges_status', 'value' => 'Success'], ['column' => 'bearer_id', 'value' => 'SecureD']], '7', 'mysql2', 't_date', true, true);
@@ -189,15 +192,18 @@ class HomeController extends Controller {
     {
         $services = Game::all();
         $serviceIDs = $services->pluck('service_id');
+        $serviceCodes = $services->pluck('service_code');
 
         // Build the initial query
         $query = Transaction::query()->whereIn('service_id', $serviceIDs);
+        $campaignQuery = CampaignLog::query();
 
         // Filter by agency
         if (!empty($_POST['agency'])) {
             $code = $_POST['agency'];
             $campaignAgency = CampaignAgency::where('code', $code)->firstOrFail();
             $query = $query->where('amount', '>', 1)->where('trans_id', 'LIKE', "$campaignAgency->code%");
+            $campaignQuery = $campaignQuery->where('uniq_id', 'LIKE', "$campaignAgency->code%");
         }
 
         // Filter by date range
@@ -205,6 +211,7 @@ class HomeController extends Controller {
             $from = $_POST['from'];
             $to = $_POST['to'] ?? now();
             $query = $query->whereBetween('t_date', [$from, $to]);
+            $campaignQuery = $campaignQuery->whereBetween('t_date', [$from, $to]);
         }
 
         // Logging the query and bindings
@@ -224,12 +231,14 @@ class HomeController extends Controller {
         $paginatedResults = $query->paginate(10);
 
         return json_success([
-            'stats' => $this->cache->remember('data_stats:' . $filtersKey, 3600, function () use ($query) {
-                return $this->getBasicStats($query);
+            'stats' => $this->cache->remember('data_stats:' . $filtersKey, 3600, function () use ($query, $campaignQuery) {
+        return $this->getBasicStats($query, $campaignQuery);
             }),
             'graphs' => $this->cache->remember('data_graphs:' . $filtersKey, 3600, function () {
                 return $this->getGraphData();
             }),
+            'raw_sql' => $campaignQuery->toSql(), // Add the raw SQL to the response
+            'bindings' => $campaignQuery->getBindings(), // Add the bindings to the response 
             'pagination' => $paginatedResults, // Add the paginated results to the response
         ]);
     }

@@ -1054,22 +1054,69 @@
     <script src="<?= config('app.public_path') ?>assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="<?= config('app.public_path') ?>assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Cache DOM elements to avoid querying multiple times
             const $campaignChooser = $("#campaign-chooser");
             const $from = $("#from");
             const $to = $("#to");
             const $csrfToken = $("input[name='csrf_token']");
             const $statsContainer = $(".stats-container");
+            let debounceTimer;
 
             // Initialize the fullData array
-            var $fullData = [];
+            let $fullData = [];
+
+            // Track active AJAX requests
+            let activeRequests = [];
+            let intervalId;
+
+            // Request batching queue
+            let batchQueue = [];
+            let batchTimeout;
+
+            // Key for localStorage
+            const FILTER_STORAGE_KEY = "filterState";
+
+            // Function to cancel all pending AJAX requests
+            function cancelActiveRequests() {
+                activeRequests.forEach(request => request.abort());
+                activeRequests = []; // Clear the array
+            }
+
+            // Function to clear the interval
+            function clearRefreshInterval() {
+                if (intervalId) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+            }
+
+            // Function to save filter state to localStorage
+            function saveFilterState() {
+                const filterState = {
+                    agency: $campaignChooser.val(),
+                    from: $from.val(),
+                    to: $to.val()
+                };
+                localStorage.setItem(FILTER_STORAGE_KEY, JSON.stringify(filterState));
+            }
+
+            // Function to load filter state from localStorage
+            function loadFilterState() {
+                const savedState = localStorage.getItem(FILTER_STORAGE_KEY);
+                if (savedState) {
+                    const { agency, from, to } = JSON.parse(savedState);
+                    if (agency) $campaignChooser.val(agency);
+                    if (from) $from.val(from);
+                    if (to) $to.val(to);
+                }
+            }
 
             // Function to update stats
             function updateStats(stats) {
                 Object.entries(stats).forEach(([key, value]) => {
-                    var $parent = $("." + key);
-                    
+                    const $parent = $("." + key);
+
                     // Update the total value only if it has changed
                     const $h1 = $parent.find("h1");
                     if ($h1.text() !== value.total) {
@@ -1081,57 +1128,102 @@
                     if ($metricLabel.text() !== value.percentage) {
                         $metricLabel.empty().append(`<span>${value.percentage}</span>`);
                     }
-
-                    // Log the subKey and subValue for debugging purposes
-                    Object.entries(value).forEach(([subKey, subValue]) => {
-                        console.log(`    ${subKey}: ${subValue}`);
-                    });
                 });
             }
 
-            // Function to get data from the server
-            function getData() {
-                // Construct the URL with JavaScript, allowing `code` to be dynamically included
-                let code = $campaignChooser.val() == 'all' ? '' : $campaignChooser.val();
-                let from = $from.val() ?? null;
-                let to   = $to.val() ?? null;
-                let csrf = $csrfToken.val();
+            // Function to send immediate requests on change events
+            function sendImmediateRequest(data) {
+                // Cancel all previous requests
+                cancelActiveRequests();
+                clearRefreshInterval(); // Clear any intervals
 
                 const url = '<?php echo url('get-data') ?>';
 
-                const data = {
-                    'agency': code,
-                    "from": from,
-                    "to": to,
-                    "csrf_token": csrf
-                };
-
-                $.post(url, data, function(response) {
-                    console.log(response);
+                const request = $.post(url, data, function (response) {
                     if (response.status === 'success') {
-                        const fullData = response.data; // Access 'stats' directly
+                        const fullData = response.data;
                         updateStats(fullData.stats);
-                        console.log("Full Data:", fullData);
+                        console.log("Immediate Full Data:", fullData);
                     } else {
                         console.error("Error: Unexpected response status");
                     }
-                }).fail(function(jqXHR, textStatus, errorThrown) {
+                }).fail(function (jqXHR, textStatus, errorThrown) {
                     console.error("AJAX request failed:", textStatus, errorThrown);
-                    console.error("Response:", jqXHR.responseText); // More detailed error info
                 });
+
+                // Add the request to activeRequests
+                activeRequests.push(request);
             }
 
-            // Trigger the data fetch when filters change
-            $campaignChooser.on("change", getData);
-            $from.on("change", getData);
-            $to.on("change", getData);
+            // Function to get data from the server
+            function getData(cancel = false) {
+                if (cancel) {
+                    cancelActiveRequests();
+                    clearRefreshInterval();
+                }
+
+                // Construct the data dynamically
+                const data = {
+                    agency: $campaignChooser.val() === 'all' ? '' : $campaignChooser.val(),
+                    from: $from.val() ?? null,
+                    to: $to.val() ?? null,
+                    csrf_token: $csrfToken.val()
+                };
+
+                // Send the request immediately
+                sendImmediateRequest(data);
+
+                // Set a new interval after the request is made
+                intervalId = setInterval(() => getData(false), 6000); // Refresh data every 6 seconds
+            }
+
+            // Debounce function
+            function debounce(func, delay) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(func, delay);
+            }
+
+            // Trigger immediate requests on filter change and save state
+            $campaignChooser.on("change", () => {
+                saveFilterState();
+                const data = {
+                    agency: $campaignChooser.val() === 'all' ? '' : $campaignChooser.val(),
+                    from: $from.val() ?? null,
+                    to: $to.val() ?? null,
+                    csrf_token: $csrfToken.val()
+                };
+                sendImmediateRequest(data);
+            });
+
+            $from.on("change", () => {
+                saveFilterState();
+                const data = {
+                    agency: $campaignChooser.val() === 'all' ? '' : $campaignChooser.val(),
+                    from: $from.val() ?? null,
+                    to: $to.val() ?? null,
+                    csrf_token: $csrfToken.val()
+                };
+                sendImmediateRequest(data);
+            });
+
+            $to.on("change", () => {
+                saveFilterState();
+                const data = {
+                    agency: $campaignChooser.val() === 'all' ? '' : $campaignChooser.val(),
+                    from: $from.val() ?? null,
+                    to: $to.val() ?? null,
+                    csrf_token: $csrfToken.val()
+                };
+                sendImmediateRequest(data);
+            });
+
+            // Load saved filter state on page load
+            loadFilterState();
 
             // Trigger initial data load
             getData();
-
-            // Periodically refresh data every 6 seconds
-            setInterval(getData, 6000);
         });
+
 
 
         var revenueArr = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'amount', 'operator' => '>', 'value'=> 1]], 'day', 7, 'mysql2', 't_date', false )) ?>;
