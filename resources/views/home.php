@@ -690,21 +690,20 @@
                             <!-- ============================================================== -->
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header"> Product Category</h5>
+                                    <h5 class="card-header"> Service Transactions</h5>
                                     <div class="card-body">
                                         <div class="ct-chart-category ct-golden-section" style="height: 315px;"></div>
                                         <div class="text-center m-t-40">
-                                            <span class="legend-item mr-3">
-                                                    <span class="fa-xs text-primary mr-1 legend-tile"><i class="fa fa-fw fa-square-full "></i></span><span class="legend-text">Man</span>
-                                            </span>
-                                            <span class="legend-item mr-3">
-                                                <span class="fa-xs text-secondary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                            <span class="legend-text">Woman</span>
-                                            </span>
-                                            <span class="legend-item mr-3">
-                                                <span class="fa-xs text-info mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                            <span class="legend-text">Accessories</span>
-                                            </span>
+                                            <?php 
+                                            $colors = ['primary', 'secondary', 'success'];
+                                            $i = 0;
+                                            foreach ($gameNames as $name) { ?>
+                                                <span class="legend-item mr-3">
+                                                    <span class="fa-xs text-<?php echo $colors[$i] ?> mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
+                                                    <span class="legend-text"><?php echo $name ?></span>
+                                                </span>
+                                            <?php $i++; }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -1233,6 +1232,9 @@
         var renRevArr = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'amount', 'operator' => '>', 'value'=> 1],['column'=> 'charges_status', 'value'=> 'Success'], ['column'=> 'bearer_id', 'operator'=> '=', 'value'=> 'system-renewal']], 'day', 7, 'mysql2', 't_date', )) ?>;
         var renewals = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'amount', 'operator' => '>', 'value'=> 1],['column'=> 'charges_status', 'value'=> 'Success'], ['column'=> 'bearer_id', 'operator'=> '=', 'value'=> 'system-renewal']], 'day', 4, 'mysql2', 't_date', true )) ?>;
         var subscriptions = <?php echo json_encode(get_interval_data('transactions', 'amount', [['column'=> 'charges_status', 'value'=> 'Success'], ['column'=> 'bearer_id', 'operator'=> '<>', 'value'=> 'system-renewal']], 'day', 4, 'mysql2', 't_date', true )) ?>;
+
+        var gameNames = <?php echo $gameNames; ?>;
+        var transactionCounts = <?php echo $transactionCounts; ?>;
     </script>
     <script src="<?= config('app.public_path') ?>assets/libs/js/dashboard-ecommerce.js"></script>
 </body>

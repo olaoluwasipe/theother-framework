@@ -184,8 +184,17 @@ class HomeController extends Controller {
         $report = $this->cache->remember('report', 3600, function () {
             return $this->getReport();
         });
+        $games = Transaction::query()
+                ->whereIn('service_id', $services->pluck('service_id'))
+                // ->join('games', 'transactions.service_id', '=', 'games.service_id')
+                ->select( DB::raw('COUNT(id) as transaction_count'))
+                ->groupBy('service_id')
+                ->get();
+        
+        $gameNames = $services->pluck('name');
+        $transactionCounts = $games->pluck('transaction_count');
 
-        return view('home', compact('stats', 'services', 'report', 'churnRate', 'date'));
+        return view('home', compact('stats', 'services', 'report', 'churnRate', 'date', 'gameNames', 'transactionCounts'));
     }
 
     public function getData()

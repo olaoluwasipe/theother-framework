@@ -50,8 +50,10 @@
     // Product Category
     // ============================================================== 
     var chart = new Chartist.Pie('.ct-chart-category', {
-        series: [60, 30, 30],
-        labels: ['Bananas', 'Apples', 'Grapes']
+        series: transactionCounts,
+        // series: [60, 30, 30],
+        labels: gameNames
+        // labels: ['Bananas', 'Apples', 'Grapes']
     }, {
         donut: true,
         showLabel: false,
