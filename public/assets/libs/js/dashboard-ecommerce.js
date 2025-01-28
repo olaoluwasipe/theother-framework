@@ -52,11 +52,11 @@
     var chart = new Chartist.Pie('.ct-chart-category', {
         series: transactionCounts,
         // series: [60, 30, 30],
-        labels: gameNames
+        labels: transactionCounts
         // labels: ['Bananas', 'Apples', 'Grapes']
     }, {
         donut: true,
-        showLabel: false,
+        showLabel: true,
         donutWidth: 40
 
     });

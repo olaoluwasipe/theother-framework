@@ -1054,35 +1054,18 @@
     <script src="<?= config('app.public_path') ?>assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script>
         $(document).ready(function () {
-            // Cache DOM elements to avoid querying multiple times
+            // Cache DOM elements
             const $campaignChooser = $("#campaign-chooser");
             const $from = $("#from");
             const $to = $("#to");
             const $csrfToken = $("input[name='csrf_token']");
-            const $statsContainer = $(".stats-container");
-            let debounceTimer;
 
-            // Initialize the fullData array
-            let $fullData = [];
-
-            // Track active AJAX requests
-            let activeRequests = [];
-            let intervalId;
-
-            // Request batching queue
-            let batchQueue = [];
-            let batchTimeout;
-
-            // Key for localStorage
             const FILTER_STORAGE_KEY = "filterState";
+            const DATA_STORAGE_KEY = "cachedData";
+            let intervalId = null; // Track interval
+            let activeRequest = null; // Track active request to avoid overlap
 
-            // Function to cancel all pending AJAX requests
-            function cancelActiveRequests() {
-                activeRequests.forEach(request => request.abort());
-                activeRequests = []; // Clear the array
-            }
-
-            // Function to clear the interval
+            // Function to clear existing interval
             function clearRefreshInterval() {
                 if (intervalId) {
                     clearInterval(intervalId);
@@ -1111,7 +1094,77 @@
                 }
             }
 
-            // Function to update stats
+            // Function to generate a unique key for the current filter state
+            function generateFilterKey() {
+                return JSON.stringify({
+                    agency: $campaignChooser.val(),
+                    from: $from.val(),
+                    to: $to.val()
+                });
+            }
+
+            // Function to get cached data from localStorage
+            function getCachedData(filterKey) {
+                const cachedData = JSON.parse(localStorage.getItem(DATA_STORAGE_KEY) || "{}");
+                return cachedData[filterKey] || null;
+            }
+
+            // Function to save data to localStorage
+            function saveCachedData(filterKey, data) {
+                const cachedData = JSON.parse(localStorage.getItem(DATA_STORAGE_KEY) || "{}");
+                cachedData[filterKey] = data;
+                localStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(cachedData));
+            }
+
+            // Function to fetch data from the server
+            function fetchData() {
+                const filterKey = generateFilterKey();
+
+                // Check for cached data
+                const cachedData = getCachedData(filterKey);
+                if (cachedData) {
+                    updateStats(cachedData.stats);
+                    console.log("Loaded from cache:", cachedData);
+                    return;
+                }
+
+                // If there's an active request, abort it to prevent overlap
+                if (activeRequest) {
+                    activeRequest.abort();
+                    activeRequest = null;
+                }
+
+                // Prepare data for AJAX
+                const data = {
+                    agency: $campaignChooser.val() === 'all' ? '' : $campaignChooser.val(),
+                    from: $from.val() || null,
+                    to: $to.val() || null,
+                    csrf_token: $csrfToken.val()
+                };
+
+                // Make the AJAX request
+                const url = '<?php echo url('get-data') ?>';
+                activeRequest = $.post(url, data, function (response) {
+                    if (response.status === 'success') {
+                        const fullData = response.data;
+
+                        // Cache the retrieved data
+                        saveCachedData(filterKey, fullData);
+
+                        // Update the UI with the new data
+                        updateStats(fullData.stats);
+                        console.log("Fetched and updated data:", fullData);
+                    } else {
+                        console.error("Error: Unexpected response status");
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("AJAX request failed:", textStatus, errorThrown);
+                }).always(function () {
+                    activeRequest = null; // Clear the active request
+                });
+            }
+
+            // Function to update stats in the UI
             function updateStats(stats) {
                 Object.entries(stats).forEach(([key, value]) => {
                     const $parent = $("." + key);
@@ -1130,98 +1183,42 @@
                 });
             }
 
-            // Function to send immediate requests on change events
-            function sendImmediateRequest(data) {
-                // Cancel all previous requests
-                cancelActiveRequests();
-                clearRefreshInterval(); // Clear any intervals
-
-                const url = '<?php echo url('get-data') ?>';
-
-                const request = $.post(url, data, function (response) {
-                    if (response.status === 'success') {
-                        const fullData = response.data;
-                        updateStats(fullData.stats);
-                        console.log("Immediate Full Data:", fullData);
-                    } else {
-                        console.error("Error: Unexpected response status");
-                    }
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    console.error("AJAX request failed:", textStatus, errorThrown);
-                });
-
-                // Add the request to activeRequests
-                activeRequests.push(request);
-            }
-
-            // Function to get data from the server
-            function getData(cancel = false) {
+            // Main function to refresh data with throttling
+            function refreshData(cancel = false) {
                 if (cancel) {
-                    cancelActiveRequests();
                     clearRefreshInterval();
+                    // return;
+                    fetchData();
                 }
+                // clearRefreshInterval(); // Ensure only one interval exists
 
-                // Construct the data dynamically
-                const data = {
-                    agency: $campaignChooser.val() === 'all' ? '' : $campaignChooser.val(),
-                    from: $from.val() ?? null,
-                    to: $to.val() ?? null,
-                    csrf_token: $csrfToken.val()
-                };
+                // Fetch data immediately
+                // fetchData();
 
-                // Send the request immediately
-                sendImmediateRequest(data);
-
-                // Set a new interval after the request is made
-                intervalId = setInterval(() => getData(false), 6000); // Refresh data every 6 seconds
+                // Set up periodic refresh (e.g., every 30 seconds)
+                intervalId = setInterval(() => {
+                    fetchData();
+                }, 30000);
             }
 
-            // Debounce function
-            function debounce(func, delay) {
-                clearTimeout(debounceTimer);
-                debounceTimer = setTimeout(func, delay);
+            // Handle filter changes
+            function onFilterChange() {
+                saveFilterState();
+                refreshData(true);
             }
-
-            // Trigger immediate requests on filter change and save state
-            $campaignChooser.on("change", () => {
-                saveFilterState();
-                const data = {
-                    agency: $campaignChooser.val() === 'all' ? '' : $campaignChooser.val(),
-                    from: $from.val() ?? null,
-                    to: $to.val() ?? null,
-                    csrf_token: $csrfToken.val()
-                };
-                sendImmediateRequest(data);
-            });
-
-            $from.on("change", () => {
-                saveFilterState();
-                const data = {
-                    agency: $campaignChooser.val() === 'all' ? '' : $campaignChooser.val(),
-                    from: $from.val() ?? null,
-                    to: $to.val() ?? null,
-                    csrf_token: $csrfToken.val()
-                };
-                sendImmediateRequest(data);
-            });
-
-            $to.on("change", () => {
-                saveFilterState();
-                const data = {
-                    agency: $campaignChooser.val() === 'all' ? '' : $campaignChooser.val(),
-                    from: $from.val() ?? null,
-                    to: $to.val() ?? null,
-                    csrf_token: $csrfToken.val()
-                };
-                sendImmediateRequest(data);
-            });
 
             // Load saved filter state on page load
             loadFilterState();
 
+            // Attach change handlers
+            $campaignChooser.on("change", onFilterChange);
+            $from.on("change", onFilterChange);
+            $to.on("change", onFilterChange);
+
             // Trigger initial data load
-            getData();
+            refreshData();
         });
+
 
 
 
