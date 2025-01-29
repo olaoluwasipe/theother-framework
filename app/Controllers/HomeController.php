@@ -265,8 +265,8 @@ class HomeController extends Controller {
 
         // Filter by date range
         if (!empty($_POST['from'])) {
-            $from = $_POST['from'];
-            $to = $_POST['to'] ?? now();
+            $from = $_POST['from'] . ' 00:00:00';
+            $to = (!empty($_POST['to']) ? $_POST['to'] . ' 23:59:59' : (now()->modify('23:59:59'))->format('Y-m-d H:i:s'));
             $query = $query->whereBetween('t_date', [$from, $to]);
             $campaignQuery = $campaignQuery->whereBetween('t_date', [$from, $to]);
         }

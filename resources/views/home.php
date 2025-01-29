@@ -477,6 +477,7 @@
                                             <div style="gap: 10px" class="form-group d-flex align-items-end">
                                                 <input class="form-control" type="date" data-date="<?php echo $date['initial'] ?>" id="from" name="from" />
                                                 <input class="form-control" type="date" data-date="<?php echo $date['final'] ?>" id="to" name="to" />
+                                                <button class="btn btn-primary" id="clear-button">Clear</button>
                                             </div>
                                         </div>
                                     </div>
@@ -486,7 +487,7 @@
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard Template</li>
+                                            <!-- <li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard Template</li> -->
                                         </ol>
                                     </nav>
                                 </div>
@@ -692,19 +693,9 @@
                                 <div class="card">
                                     <h5 class="card-header"> Service Transactions</h5>
                                     <div class="card-body">
-                                        <div class="ct-chart-category ct-golden-section" style="height: 315px;"></div>
-                                        <div class="text-center m-t-40">
-                                            <?php 
-                                            $colors = ['primary', 'secondary', 'success'];
-                                            $i = 0;
-                                            foreach ($gameNames as $name) { ?>
-                                                <span class="legend-item mr-3">
-                                                    <span class="fa-xs text-<?php echo $colors[$i] ?> mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                                    <span class="legend-text"><?php echo $name ?></span>
-                                                </span>
-                                            <?php $i++; }
-                                            ?>
-                                        </div>
+                                        <!-- <div class="ct-chart-category ct-golden-section" style="height: 315px;"></div> -->
+                                        <div class="apex-chart-category apex-golden-section"></div>
+                                        <!-- -->
                                     </div>
                                 </div>
                             </div>
@@ -712,21 +703,11 @@
                             <!-- end product category  -->
                                    <!-- product sales  -->
                             <!-- ============================================================== -->
+                            
                             <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <!-- <div class="float-right">
-                                                <select class="custom-select">
-                                                    <option selected>Today</option>
-                                                    <option value="1">Weekly</option>
-                                                    <option value="2">Monthly</option>
-                                                    <option value="3">Yearly</option>
-                                                </select>
-                                            </div> -->
-                                        <h5 class="mb-0"> Product Sales</h5>
-                                    </div>
                                     <div class="card-body">
-                                        <div class="ct-chart-product ct-golden-section"></div>
+                                        <div class="apex-chart-product apex-golden-section"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1035,6 +1016,8 @@
     <script src="<?= config('app.public_path') ?>assets/vendor/charts/c3charts/c3.min.js"></script>
     <script src="<?= config('app.public_path') ?>assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="<?= config('app.public_path') ?>assets/vendor/charts/c3charts/C3chartjs.js"></script>
+    <!-- Apex charts js -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
         $(document).ready(function () {
             // Cache DOM elements
@@ -1047,6 +1030,14 @@
             const DATA_STORAGE_KEY = "cachedData";
             let intervalId = null; // Track interval
             let activeRequest = null; // Track active request to avoid overlap
+
+            $("#clear-button").click(function () {
+                $campaignChooser.val("all");
+                $from.val("");
+                $to.val("");
+                saveFilterState();
+                fetchData();
+            });
 
             // Function to clear existing interval
             function clearRefreshInterval() {
@@ -1106,7 +1097,7 @@
                 // Check for cached data
                 const cachedData = getCachedData(filterKey);
                 const parsedCachedData = JSON.parse(filterKey);
-                if (cachedData && (parsedCachedData.to !== '')) {
+                if (cachedData && (parsedCachedData.agency !== 'all' && parsedCachedData.to !== '')) {
                     updateStats(cachedData.stats);
                     console.log("Loaded from cache:", cachedData);
                     return;
@@ -1207,6 +1198,34 @@
             refreshData();
         });
 
+        function getLastNDaysLabels(n) {
+            const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const labels = [];
+            const today = new Date();
+
+            for (let i = n - 1; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(today.getDate() - i);
+                labels.push(daysOfWeek[date.getDay()]);
+            }
+
+            return labels;
+        }
+
+        function getLastNMonthsLabels(n) {
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const labels = [];
+            const today = new Date();
+
+            for (let i = 0; i < n; i++) {
+                const date = new Date();
+                date.setMonth(today.getMonth() - i);
+                labels.push(months[date.getMonth()]);
+            }
+
+            return labels.reverse(); // Ensure order is from oldest to newest
+        }
+
 
 
 
@@ -1222,6 +1241,123 @@
         var gameNames = <?php echo $gameNames; ?>;
         var transactionCounts = <?php echo $transactionCounts; ?>;
         var pastFourMonths = <?php echo $pastFourMonths; ?>;
+
+
+
+
+
+
+        var chartData = pastFourMonths.map((counts, index) => ({
+            name: gameNames[index],
+            data: counts
+          }))
+          console.log(chartData)
+        // Charts
+        var options = {
+            series: chartData,
+          chart: {
+          type: 'bar',
+          height: 350,
+        //   stacked: true,
+        },
+            plotOptions: {
+            bar: {
+                horizontal: false,
+                vertical: true,
+                dataLabels: {
+                total: {
+                    enabled: true,
+                    offsetX: 0,
+                    style: {
+                    fontSize: '40px',
+                    fontWeight: 900
+                    }
+                }
+                }
+            },
+            },
+            stroke: {
+                width: 1,
+                colors: ['#fff']
+            },
+            title: {
+            text: 'Game Sales'
+            },
+            xaxis: {
+            categories: getLastNMonthsLabels(pastFourMonths[0].length),
+            labels: {
+                formatter: function (val) {
+                return val
+                }
+            }
+            },
+            yaxis: {
+            title: {
+                text: undefined
+            },
+            labels: {
+                formatter: function (val) {
+                return "₦" + (val / 1000000) + "M"
+                }
+            }
+            },
+            tooltip: {
+            y: {
+                formatter: function (val) {
+                return "₦" + (val / 1000000).toFixed(1) + "M"
+                }
+            }
+            },
+            fill: {
+            opacity: 1
+            },
+            legend: {
+            position: 'top',
+            horizontalAlign: 'left',
+            offsetX: 40
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector(".apex-chart-product"), options);
+        chart.render();
+
+
+        var options = {
+          series: transactionCounts,
+          chart: {
+          type: 'donut',
+        },
+        labels: gameNames,
+        dataLabels: {
+          enabled: true,
+        },
+            tooltip: {
+            y: {
+                formatter: function (val) {
+                return (val / 1000).toFixed(1) + "K"
+                }
+            }
+            },
+        legend: {
+            position: 'bottom',
+            horizontalAlign: 'center',
+            // offsetX: 40
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var serviceTransactions = new ApexCharts(document.querySelector(".apex-chart-category"), options);
+        serviceTransactions.render();
     </script>
     <script src="<?= config('app.public_path') ?>assets/libs/js/dashboard-ecommerce.js"></script>
 </body>
