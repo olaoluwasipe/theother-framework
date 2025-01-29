@@ -165,7 +165,6 @@ class HomeController extends Controller {
 
     public function index()
     {
-        $this->cache->clear();
         $services = Game::all();
 
         $date['initial'] = now()->subDays(1)->format('Y-m-d\TH:i');
@@ -186,7 +185,6 @@ class HomeController extends Controller {
         });
         $games = Transaction::query()
                 ->whereIn('service_id', $services->pluck('service_id'))
-                // ->join('games', 'transactions.service_id', '=', 'games.service_id')
                 ->select( DB::raw('COUNT(id) as transaction_count'))
                 ->groupBy('service_id')
                 ->get();
@@ -194,7 +192,57 @@ class HomeController extends Controller {
         $gameNames = $services->pluck('name');
         $transactionCounts = $games->pluck('transaction_count');
 
-        return view('home', compact('stats', 'services', 'report', 'churnRate', 'date', 'gameNames', 'transactionCounts'));
+        $pastFourMonths = [];
+
+        foreach ($services as $game) {
+            $pastFourMonths[] = Transaction::select(
+                                            DB::raw("SUM(amount) as total_amount"),
+                                            DB::raw("DATE_FORMAT(t_date, '%Y-%m') as month_year") // Format year and month for ordering
+                                        )
+                                        ->where('service_id', $game->service_id)
+                                        ->where('t_date', '>=', now()->subMonths(4)) // Get transactions within last 4 months
+                                        ->groupBy(DB::raw("DATE_FORMAT(t_date, '%Y-%m')")) // Group by formatted date
+                                        ->orderBy(DB::raw("DATE_FORMAT(t_date, '%Y-%m')"), 'asc') // Order by formatted date
+                                        ->pluck('total_amount') // Get as a simple array
+                                        ->toArray();
+        }
+
+        $pastFourMonths = json_encode($pastFourMonths);
+
+        $campaigns = CampaignAgency::all()->map(function ($agency) {
+            $result = new \stdClass;
+            
+            // Aggregate transactions for each agency by `trans_id` prefix
+            $query = Transaction::query()->where('trans_id', 'LIKE', $agency->code . '%')->where('charges_status', 'Success');
+            
+            // Get the sum of amounts
+            $result->total_amount = $query->sum('amount');
+            
+            // Get the count of transactions where bearer_id is 'SecureD'
+            $result->transaction_count = CampaignLog::where('uniq_id', 'LIKE', $agency->code . '%')->where('status', 1)->count();
+            
+            // Add the agency's name to the result
+            $result->agency_name = $agency->name;
+            
+            return $result;
+        })
+        ->sortByDesc(function ($item) {
+            // Sort first by total_amount, and if equal, then by transaction_count
+            return $item->total_amount;
+        })
+        ->values(); // Reset the array keys after sorting
+
+        return view('home', compact(
+                'stats', 
+            'services', 
+            'report', 
+            'churnRate', 
+            'date', 
+            'gameNames', 
+            'transactionCounts', 
+            'pastFourMonths',
+            'campaigns'
+        ));
     }
 
     public function getData()
@@ -231,8 +279,8 @@ class HomeController extends Controller {
         $filtersKey = md5(json_encode($_POST));
 
         // Invalidate the cache for the key before querying
-        $this->cache->forget('data_stats:' . $filtersKey);
-        $this->cache->forget('data_graphs:' . $filtersKey);
+        // $this->cache->forget('data_stats:' . $filtersKey);
+        // $this->cache->forget('data_graphs:' . $filtersKey);
 
         $_SESSION['filters'] = $filtersKey;
 

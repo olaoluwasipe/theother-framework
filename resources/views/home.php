@@ -745,41 +745,24 @@
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
                                                         <th class="border-0">Campaign</th>
-                                                        <th class="border-0">Visits</th>
-                                                        <th class="border-0">Revenue</th>
+                                                        <th class="border-0">Subs</th>
+                                                        <th class="border-0">Renewal Revenue</th>
+                                                        <th class="border-0">Total Cost</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Campaign#1</td>
-                                                        <td>98,789 </td>
-                                                        <td>$4563</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Campaign#2</td>
-                                                        <td>2,789 </td>
-                                                        <td>$325</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Campaign#3</td>
-                                                        <td>1,459 </td>
-                                                        <td>$225</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Campaign#4</td>
-                                                        <td>5,035 </td>
-                                                        <td>$856</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Campaign#5</td>
-                                                        <td>10,000 </td>
-                                                        <td>$1000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Campaign#5</td>
-                                                        <td>10,000 </td>
-                                                        <td>$1000</td>
-                                                    </tr>
+                                                    <?php
+                                                    foreach ($campaigns as $campaign) { 
+                                                        ?>
+                                                        <tr>
+                                                            <td><?php echo $campaign->agency_name ?></td>
+                                                            <td><?php echo number_format($campaign->transaction_count) ?> </td>
+                                                            <td><?php echo format_money($campaign->total_amount) ?></td>
+                                                            <td><?php echo format_money(amount: $campaign->transaction_count * 0.35, symbol: '$') ?></td>
+                                                        </tr>
+                                                    <?php }
+
+                                                    ?>
                                                     <tr>
                                                         <td colspan="3">
                                                             <a href="#" class="btn btn-outline-light float-right">Details</a>
@@ -1078,7 +1061,7 @@
                 const filterState = {
                     agency: $campaignChooser.val(),
                     from: $from.val(),
-                    to: $to.val()
+                    to: $to.val(),
                 };
                 localStorage.setItem(FILTER_STORAGE_KEY, JSON.stringify(filterState));
             }
@@ -1099,7 +1082,7 @@
                 return JSON.stringify({
                     agency: $campaignChooser.val(),
                     from: $from.val(),
-                    to: $to.val()
+                    to: $to.val(),
                 });
             }
 
@@ -1122,7 +1105,8 @@
 
                 // Check for cached data
                 const cachedData = getCachedData(filterKey);
-                if (cachedData) {
+                const parsedCachedData = JSON.parse(filterKey);
+                if (cachedData && (parsedCachedData.to !== '')) {
                     updateStats(cachedData.stats);
                     console.log("Loaded from cache:", cachedData);
                     return;
@@ -1136,16 +1120,16 @@
 
                 // Prepare data for AJAX
                 const data = {
-                    agency: $campaignChooser.val() === 'all' ? '' : $campaignChooser.val(),
+                    agency: $campaignChooser.val() === "all" ? "" : $campaignChooser.val(),
                     from: $from.val() || null,
                     to: $to.val() || null,
-                    csrf_token: $csrfToken.val()
+                    csrf_token: $csrfToken.val(),
                 };
 
                 // Make the AJAX request
-                const url = '<?php echo url('get-data') ?>';
+                const url = "<?php echo url('get-data') ?>";
                 activeRequest = $.post(url, data, function (response) {
-                    if (response.status === 'success') {
+                    if (response.status === "success") {
                         const fullData = response.data;
 
                         // Cache the retrieved data
@@ -1157,11 +1141,13 @@
                     } else {
                         console.error("Error: Unexpected response status");
                     }
-                }).fail(function (jqXHR, textStatus, errorThrown) {
-                    console.error("AJAX request failed:", textStatus, errorThrown);
-                }).always(function () {
-                    activeRequest = null; // Clear the active request
-                });
+                })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        console.error("AJAX request failed:", textStatus, errorThrown);
+                    })
+                    .always(function () {
+                        activeRequest = null; // Clear the active request
+                    });
             }
 
             // Function to update stats in the UI
@@ -1186,29 +1172,31 @@
             // Main function to refresh data with throttling
             function refreshData(cancel = false) {
                 if (cancel) {
-                    clearRefreshInterval();
-                    // return;
-                    fetchData();
+                    clearRefreshInterval(); // Stop the interval when filters are applied
+                    fetchData(); // Immediately fetch data based on filters
+                    return;
                 }
-                // clearRefreshInterval(); // Ensure only one interval exists
 
-                // Fetch data immediately
-                // fetchData();
+                // Ensure only one interval exists
+                clearRefreshInterval();
 
-                // Set up periodic refresh (e.g., every 30 seconds)
+                // Fetch data immediately and then set up periodic refresh
+                fetchData();
                 intervalId = setInterval(() => {
-                    fetchData();
+                    if (!activeRequest) {
+                        fetchData(); // Only fetch if no active request
+                    }
                 }, 30000);
             }
 
             // Handle filter changes
             function onFilterChange() {
                 saveFilterState();
-                refreshData(true);
+                refreshData(true); // Stop intervals and fetch new data immediately
             }
 
             // Load saved filter state on page load
-            loadFilterState();
+            // loadFilterState();
 
             // Attach change handlers
             $campaignChooser.on("change", onFilterChange);
@@ -1218,6 +1206,7 @@
             // Trigger initial data load
             refreshData();
         });
+
 
 
 
@@ -1232,6 +1221,7 @@
 
         var gameNames = <?php echo $gameNames; ?>;
         var transactionCounts = <?php echo $transactionCounts; ?>;
+        var pastFourMonths = <?php echo $pastFourMonths; ?>;
     </script>
     <script src="<?= config('app.public_path') ?>assets/libs/js/dashboard-ecommerce.js"></script>
 </body>

@@ -7,18 +7,20 @@
         // ============================================================== 
 
         new Chartist.Bar('.ct-chart-product', {
-            labels: ['Q1', 'Q2', 'Q3', 'Q4'],
-            series: [
-                [800000, 1200000, 1400000, 1300000],
-                [200000, 400000, 500000, 300000],
-                [100000, 200000, 400000, 600000]
-            ]
+            labels: getLastNMonthsLabels(pastFourMonths[0].length),
+            series: pastFourMonths
         }, {
-            stackBars: true,
+            // stackBars: true,
+            seriesBarDistance: 30,
+            axisX: {
+                offset: 80
+            },
             axisY: {
+                offset: 80,
                 labelInterpolationFnc: function(value) {
-                    return (value / 1000) + 'k';
-                }
+                    return (value / 1000000) + 'm';
+                },
+                scaleMinSpace: 15
             }
         }).on('draw', function(data) {
             if (data.type === 'bar') {
@@ -43,21 +45,39 @@
         return labels;
     }
 
+    function getLastNMonthsLabels(n) {
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const labels = [];
+        const today = new Date();
+    
+        for (let i = 0; i < n; i++) {
+            const date = new Date();
+            date.setMonth(today.getMonth() - i);
+            labels.push(months[date.getMonth()]);
+        }
+    
+        return labels.reverse(); // Ensure order is from oldest to newest
+    }
+
+
 
 
 
     // ============================================================== 
     // Product Category
     // ============================================================== 
+    var chartTrans = transactionCounts.map((num) => (num / 1000).toFixed(1) + 'k');
     var chart = new Chartist.Pie('.ct-chart-category', {
         series: transactionCounts,
         // series: [60, 30, 30],
-        labels: transactionCounts
+        labels: chartTrans
         // labels: ['Bananas', 'Apples', 'Grapes']
     }, {
         donut: true,
         showLabel: true,
-        donutWidth: 40
+        donutWidth: 40,
+        labelOffset: 20,
+        labelDirection: 'explode'
 
     });
 
