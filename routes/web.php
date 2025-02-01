@@ -18,6 +18,10 @@ $router->get('/phpinfo', function() {
 $router->group(['middleware' => ['auth']], function($router) {
     $router->get('/', 'HomeController@index');
 
+    $router->get('/activity', 'ActivityController@index');
+
+    $router->get('/data/activities', 'ActivityController@activities');
+
     $router->post('/get-data', 'HomeController@getData');
 
     $router->get('/get-data/{code}', 'HomeController@getCampaignData');

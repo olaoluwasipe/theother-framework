@@ -19,6 +19,13 @@ class AuthController extends Controller {
             if ($user && password_verify($password, $user->password)) {
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['username'] = $user->username;
+
+                $redirectUrl = $_SESSION['redirect_after_login'] ?? null;
+
+                if($redirectUrl) {
+                    unset($_SESSION['redirect_after_login']);
+                    header("Location: $redirectUrl");
+                }
                         
                 json_response(['status'=> 'success', 'message' => 'Login successful']);
             }

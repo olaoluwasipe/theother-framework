@@ -103,6 +103,24 @@ if (!function_exists('url')) {
     }
 }
 
+if (!function_exists('getFullUrl')) {
+    function getFullUrl($withParams = false) {
+        $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443;
+        $protocol = $https ? "https://" : "http://";
+        
+        if (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+            $protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'] . '://';
+        }
+    
+        $host = $_SERVER['HTTP_HOST'];
+        $uri = $_SERVER['REQUEST_URI'];
+        if($withParams) {
+            $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        }
+        return $protocol . $host . $uri;
+    }
+}
+
 if (!function_exists('csrf_token')) {
     function csrf_token()
     {
@@ -519,9 +537,27 @@ if(!function_exists('transformToInteger')) {
         return (int) $value;
     }
     
-    // Examples
-    // echo transformToInteger("₦95,688,500") . PHP_EOL; // Output: 95688500
-    // echo transformToInteger("31.29%") . PHP_EOL;      // Output: 31
+}
+
+if(!function_exists('transformToFloat')) {
+    function transformToFloat($value) {
+        // Remove commas, currency symbols, and percentage signs
+        if (strpos($value, '₦') !== false || strpos($value, ',') !== false) {
+            // Handle currency format
+            $cleanedValue = preg_replace('/[₦,]/', '', $value);
+            return (float) $cleanedValue;
+        }
+        
+        if (strpos($value, '%') !== false) {
+            // Handle percentage format
+            $cleanedValue = str_replace('%', '', $value);
+            return (float) floatval($cleanedValue);
+        }
+        
+        // Throw an exception if the format is not recognized
+        // throw new InvalidArgumentException("Input format not recognized. Supported formats: '₦', ',', '%'.");
+        return (int) $value;
+    }
     
 }
 

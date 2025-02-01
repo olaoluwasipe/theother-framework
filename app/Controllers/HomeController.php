@@ -70,9 +70,9 @@ class HomeController extends Controller {
             
             // Ensure both values are properly converted to integers before addition
             if($filters !== null || $filters !== '' || $query !== null) {
-                $updatedValue = transformToInteger($newValue);
+                $updatedValue = transformToFloat($newValue);
             } else {
-                $updatedValue = transformToInteger($cachedValue) + transformToInteger($newValue);
+                $updatedValue = transformToFloat($cachedValue) + transformToFloat($newValue);
             }
             // $updatedValue = transformToInteger($cachedValue) + transformToInteger($newValue);
 
@@ -80,7 +80,7 @@ class HomeController extends Controller {
             $this->cache->put($key, $updatedValue, $cacheTTL);
 
             // Handle specific formats (e.g., percentage, currency)
-            if (strpos($cachedValue, '%') !== false) {
+            if (strpos($newValue, '%') !== false || strpos($cachedValue, '%') !== false) {
                 return number_format($updatedValue, 2) . '%';
             }
             if (strpos($cachedValue, '₦') !== false || strpos($newValue, '₦') !== false) {
@@ -141,10 +141,20 @@ class HomeController extends Controller {
                 }),
             ],
             'churnRate' => [
-                'total' => $this->cache->remember('stats:churnRate:total', $cacheTTL, function () {
-                    return number_format($this->getChurnRate(), 2) . '%';
-                }),
+                'total' => $updateCachedStat(
+                    'stats:churnRate:total',
+                     $this->getChurnRate()
+                ),
                 'percentage' => $this->cache->remember('stats:churnRate:percentage', $cacheTTL, function () {
+                    return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1], ['column' => 'charges_status', 'value' => 'Success'], ['column' => 'bearer_id', 'value' => 'system-renewal']], '7', 'mysql2', 't_date', true, true);
+                }),
+            ],
+            'conversionRate' => [
+                'total' => $updateCachedStat(
+                    'stats:conversionRate:total',
+                    $this->getConversionRate( $newCampaignQuery ?? null)
+                ),
+                'percentage' => $this->cache->remember('stats:conversionRate:percentage', $cacheTTL, function () {
                     return get_percentage_difference('transactions', 'amount', [['column' => 'amount', 'operator' => '>', 'value' => 1], ['column' => 'charges_status', 'value' => 'Success'], ['column' => 'bearer_id', 'value' => 'system-renewal']], '7', 'mysql2', 't_date', true, true);
                 }),
             ],
@@ -165,6 +175,7 @@ class HomeController extends Controller {
 
     public function index()
     {
+        // $this->cache->clear();
         $services = Game::all();
 
         $date['initial'] = now()->subDays(1)->format('Y-m-d\TH:i');
@@ -228,7 +239,7 @@ class HomeController extends Controller {
         })
         ->sortByDesc(function ($item) {
             // Sort first by total_amount, and if equal, then by transaction_count
-            return $item->total_amount;
+            return $item->transaction_count;
         })
         ->values(); // Reset the array keys after sorting
 
@@ -254,6 +265,13 @@ class HomeController extends Controller {
         // Build the initial query
         $query = Transaction::query()->whereIn('service_id', $serviceIDs);
         $campaignQuery = CampaignLog::query();
+
+        // Filter by Service 
+        if (!empty($_POST['service'])) {
+            $service = $_POST['service'];
+            $query = $query->where('service_id', $service);
+            $campaignQuery = $campaignQuery->where('service_code', Game::where('service_id', $service)->first()->code);
+        }
 
         // Filter by agency
         if (!empty($_POST['agency'])) {
@@ -285,7 +303,7 @@ class HomeController extends Controller {
         $_SESSION['filters'] = $filtersKey;
 
         // Paginate the query (10 items per page)
-        $paginatedResults = $query->paginate(10);
+        // $paginatedResults = $query->paginate(10);
 
         return json_success([
             'stats' => $this->cache->remember('data_stats:' . $filtersKey, 3600, function () use ($query, $campaignQuery) {
@@ -294,9 +312,6 @@ class HomeController extends Controller {
             'graphs' => $this->cache->remember('data_graphs:' . $filtersKey, 3600, function () {
                 return $this->getGraphData();
             }),
-            'raw_sql' => $campaignQuery->toSql(), // Add the raw SQL to the response
-            'bindings' => $campaignQuery->getBindings(), // Add the bindings to the response 
-            'pagination' => $paginatedResults, // Add the paginated results to the response
         ]);
     }
 
@@ -317,6 +332,24 @@ class HomeController extends Controller {
             }),
         ]);
     }
+
+    public function getConversionRate($query = null) {
+        // Ensure $query is a valid QueryBuilder instance
+        // $query = $query ?? CampaignLog::query();
+    
+        // Clone the query before modifying it
+        $success = (clone $query)->where('status', 1)->count();
+        $unsuccess = (clone $query)->where('status', 0)->count();
+    
+        // Avoid division by zero
+        if ($success + $unsuccess === 0) {
+            return 0; // No data available, so return 0% conversion rate
+        }
+
+        // print_r(($success / ($success + $unsuccess)) * 100);
+        return number_format(($success / ($success + $unsuccess)) * 100) . '%';
+    }
+    
 
     public function getReport($service = null)
     {
@@ -371,7 +404,7 @@ class HomeController extends Controller {
                 ->distinct('msisdn')
                 ->count('msisdn');
 
-            return $activeSubscribers > 0 ? ($subscribersLost / $activeSubscribers) * 100 : 0;
+            return number_format($activeSubscribers > 0 ? ($subscribersLost / $activeSubscribers) * 100 : 0) . '%';
         });
     }
 
