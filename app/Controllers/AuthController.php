@@ -20,11 +20,13 @@ class AuthController extends Controller {
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['username'] = $user->username;
 
-                $redirectUrl = $_SESSION['redirect_after_login'] ?? null;
+                // $redirectUrl = $_SESSION['redirect_after_login'] ?? null;
 
-                if($redirectUrl) {
-                    unset($_SESSION['redirect_after_login']);
-                    header("Location: $redirectUrl");
+                if (isset($_SESSION['redirect_after_login'])) {
+                    $redirectTo = $_SESSION['redirect_after_login'];
+                    unset($_SESSION['redirect_after_login']); // Clear it after use
+                    json_response(['status'=> 'success', 'message' => 'Login successful', 'redirect' => $redirectTo]);
+                    exit;
                 }
                         
                 json_response(['status'=> 'success', 'message' => 'Login successful']);

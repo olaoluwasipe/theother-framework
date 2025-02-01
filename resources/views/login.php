@@ -85,7 +85,9 @@
                             icon: response['status'],
                             text: response['message'],
                         }).then(function() {
-                            if (response['status'] === 'success') {
+                            if(response['status'] == 'success' && response['redirect'] !== null) {
+                                window.location.href = response['redirect'];
+                            }else if (response['status'] === 'success') {
                                 window.location.href = "<?php echo url(); ?>";
                             }
                         });
