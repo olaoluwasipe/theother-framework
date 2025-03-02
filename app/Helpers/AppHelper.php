@@ -7,6 +7,9 @@ use App\Facades\CustomDateTime;
 use App\Facades\Log;
 use Core\CacheManager;
 use Core\Logger;
+use App\Pagination\CustomPaginator;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Request;
 
 if (!function_exists('config')) {
     function config($key = null, $default = null)
@@ -37,6 +40,26 @@ if (!function_exists('config')) {
         }
 
         return $config;
+    }
+}
+
+if(!function_exists('paginate')) {
+    function paginate($query, $perPage = 15, $page = null)
+    {
+        $page = $page ?: ($_GET['page'] ?? 1);
+        $total = $query->count();
+        $results = $query->forPage($page, $perPage)->get();
+
+         // Manually construct the pagination URL
+        $path = ($_SERVER['REQUEST_SCHEME'] ?? 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? '') . ($_SERVER['REQUEST_URI'] ?? '');
+        $query = $_GET;
+
+        unset($query['page']); // Remove existing page query to prevent duplication
+
+        return new CustomPaginator($results, $total, $perPage, $page, [
+            'path' => $path,
+            'query' => $query,
+        ]);
     }
 }
 
@@ -76,7 +99,9 @@ if (!function_exists('redirect')) {
 if (!function_exists('view')) {
     function view($view, $data = [])
     {
-        $viewPath = __DIR__ . '/../../resources/views/' . $view . '.php';
+        // Convert dot notation to directory separators
+        $viewPath = __DIR__ . '/../../resources/views/' . str_replace('.', '/', $view) . '.php';
+
         if (file_exists($viewPath)) {
             extract($data);
             require $viewPath;

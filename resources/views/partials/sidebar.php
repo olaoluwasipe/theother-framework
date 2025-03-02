@@ -21,6 +21,10 @@
                                 <a class="nav-link <?= getFullUrl() == url('/activity') ? 'active' : '' ?>" href="<?= url('/activity') ?>" aria-expanded="false"><i class="fa fa-fw fa-rocket"></i>Activity <span class="badge badge-success">6</span></a>
                                 
                             </li>
+                            <li class="nav-item ">
+                                <a class="nav-link <?= getFullUrl() == url('/games') ? 'active' : '' ?>" href="<?= url('/games') ?>" aria-expanded="false"><i class="fa fa-fw fa-gamepad"></i>Games <span class="badge badge-success">6</span></a>
+                                
+                            </li>
                             <!-- <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>UI Elements</a>
                                 <div id="submenu-2" class="collapse submenu" >

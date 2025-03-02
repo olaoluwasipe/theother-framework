@@ -5,8 +5,8 @@ use Illuminate\Database\Capsule\Manager as DB;
 // $router->get('/', 'HomeController@index');
 $router->get('/login', 'HomeController@login');
 $router->post('/login', 'AuthController@login');
-$router->get('/register', 'HomeController@register');
-$router->post('/register', 'AuthController@register');
+// $router->get('/register', 'HomeController@register');
+// $router->post('/register', 'AuthController@register');
 $router->get('/logout', 'AuthController@logout');
 
 $router->get('/campaign/{code}', 'CampaignController@index');
@@ -19,6 +19,8 @@ $router->group(['middleware' => ['auth']], function($router) {
     $router->get('/', 'HomeController@index');
 
     $router->get('/activity', 'ActivityController@index');
+
+    $router->get('/games', 'GameController@index');
 
     $router->get('/data/activities', 'ActivityController@activities');
 

@@ -18,4 +18,8 @@ class Game extends Model {
         'created_at',
         'updated_at',
     ];
+
+    public function transactions () {
+        return $this->hasMany(Transaction::class, 'service_id', 'service_id');
+    }
 }

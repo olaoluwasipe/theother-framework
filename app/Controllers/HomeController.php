@@ -175,7 +175,7 @@ class HomeController extends Controller {
 
     public function index()
     {
-        // $this->cache->clear();
+        $this->cache->clear();
         $services = Game::all();
 
         $date['initial'] = now()->subDays(1)->format('Y-m-d\TH:i');
@@ -194,6 +194,8 @@ class HomeController extends Controller {
         $report = $this->cache->remember('report', 3600, function () {
             return $this->getReport();
         });
+
+        // $report = paginate($this->getReport(), 10);
         $games = Transaction::query()
                 ->whereIn('service_id', $services->pluck('service_id'))
                 ->select( DB::raw('COUNT(id) as transaction_count'))
@@ -351,12 +353,12 @@ class HomeController extends Controller {
     }
     
 
-    public function getReport($service = null)
+    public function getReport($service = null, $perPage = 10)
     {
         $services = Game::all();
         $serviceIDs = $services->pluck('service_id');
 
-        return $this->cache->remember('report:' . ($service ?? 'all'), 3600, function () use ($service, $serviceIDs) {
+        return $this->cache->remember('report:' . ($service ?? 'all'), 3600, function () use ($service, $serviceIDs, $perPage) {
             $query = DB::connection('mysql2')
                 ->table('transactions')
                 ->select([
@@ -379,11 +381,15 @@ class HomeController extends Controller {
                 ->groupBy(DB::raw('DATE(t_date)'))
                 ->orderBy(DB::raw('DATE(t_date)'), 'DESC');
 
-            return $service === null ? 
-                $query->whereIn('service_id', $serviceIDs)->get() : 
-                $query->where('service_id', $service)->when($serviceIDs->has($service), function ($q) {
-                    return $q;
-                })->get();
+            // Apply service filter if provided
+            if ($service === null) {
+                $query->whereIn('service_id', $serviceIDs);
+            } else {
+                $query->where('service_id', $service);
+            }
+
+            // Paginate the results
+            return $query->get();
         });
     }
 

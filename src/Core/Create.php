@@ -19,6 +19,11 @@ $directory = $basePath . $directories[$type];
 $fileName = ($type !== 'migration' ? ucfirst($name) : $name) . ($type === 'migration' ? '_' . date('Y_m_d_His') : '') . '.php';
 $filePath = $directory . $fileName;
 
+if ($type == 'controller' && strpos($name, 'Controller') === false) {
+    $filePath = str_replace(".php", "Controller.php", $filePath);
+    // $filePath = $filePath . 'Controller';
+}
+
 if($type === 'migration') {
     $tableName = str_replace('create_', '', $name);
     $tableName = str_replace('_table', '', $tableName);
